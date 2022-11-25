@@ -184,6 +184,9 @@ resources:
               if which kubectl >/dev/null; then (echo "# Finished kubectl client setup"; exit 0) else (echo "# Error while installing kubectl client"; exit 99); fi
               echo "# Configuring kubectl and installing plugins"
               mkdir /home/syseleven/.kube
+              chown syseleven:syseleven /home/syseleven/.kube
+              chmod 700 /home/syseleven/.kube
+              echo "# adding kubectl alias and autocompletion"
               echo "source <(kubectl completion bash)" >> /home/syseleven/.bashrc
               echo "alias k=kubectl" >>  /home/syseleven/.bashrc
               echo "complete -o default -F __start_kubectl k" >> /home/syseleven/.bashrc
@@ -206,8 +209,6 @@ resources:
               tar -zxvf helm-v3.10.2-linux-amd64.tar.gz
               mv linux-amd64/helm /usr/local/bin/helm
               if which helm >/dev/null; then (echo "# Finished helm client setup"; exit 0) else (echo "# Error while installing helm client"; exit 99); fi
-              echo "# Installing helm diff plugin"
-              /usr/local/bin/helm plugin install https://github.com/databus23/helm-diff
            path: /root/helmclient-install.sh
            owner: root
            permissions: 0700
