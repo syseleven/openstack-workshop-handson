@@ -187,6 +187,13 @@ resources:
               echo "source <(kubectl completion bash)" >> /home/syseleven/.bashrc
               echo "alias k=kubectl" >>  /home/syseleven/.bashrc
               echo "complete -o default -F __start_kubectl k" >> /home/syseleven/.bashrc
+              echo "# Downloading and installing kubectx and kubens"
+              curl -LO https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx_v0.9.4_linux_x86_64.tar.gz
+              tar -zxvf kubectx_v0.9.4_linux_x86_64.tar.gz 
+              mv kubectx /usr/local/bin/kubectx
+              curl -LO https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens_v0.9.4_linux_x86_64.tar.gz
+              tar -zxvf kubens_v0.9.4_linux_x86_64.tar.gz
+              mv kubens /usr/local/bin/kubens
            path: /root/kubectlclient-install.sh
            owner: root
            permissions: 0700
