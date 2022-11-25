@@ -198,9 +198,9 @@ resources:
               echo "# Installing helm client"
               tar -zxvf helm-v3.10.2-linux-amd64.tar.gz
               mv linux-amd64/helm /usr/local/bin/helm
-              echo "# Installing helm diff plugin"
               if which helm >/dev/null; then (echo "# Finished helm client setup"; exit 0) else (echo "# Error while installing helm client"; exit 99); fi
-              helm plugin install https://github.com/databus23/helm-diff
+              echo "# Installing helm diff plugin"
+              /usr/local/bin/helm plugin install https://github.com/databus23/helm-diff
            path: /root/helmclient-install.sh
            owner: root
            permissions: 0700
