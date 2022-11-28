@@ -10,10 +10,10 @@
   * Password: `<Passwort>`
 * Klick auf "CONNECT"
 
-<img src="https://docs.syseleven.de/syseleven-stack/user/pages/images/horizon-login.png"/>
+![](images/01-login-window.png)
 
 ## Region auswählen
 
 * Überprüfe zunächst in welcher Region Du angemeldet bist und wechsle ggf. auf die richtige Region
 
-![](images/01-02-select-region.png)
+![](images/02-select-region.png)
