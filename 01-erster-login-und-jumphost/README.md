@@ -73,10 +73,13 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit Openstack zu beginn
 * Daraufhin ist der Stack im Status **Create In Progress** oder **Create Complete**
 * Klick auf **Compute** --> **Instances**
 * beachte die **Floating IP** in der Spalte **IP Address** deiner neuen Instance
-* öffne ein Terminal deiner Wahl und log dich via SSH mit dem Benutzernamen `syseleven` in deine Instance ein:
+* öffne ein Terminal deiner Wahl und log dich via SSH mit dem Benutzernamen `syseleven` in deine Jumphost-Instance ein:
+
 `ssh syseleven@<Floating IP> -i ~/.ssh/<private SSH key>`
 
-**Beachte:** die Bereitstellung aller nötigen Tools im Jumphost kann wenige Minuten dauern
+**Beachte:**
+
+die Bereitstellung aller nötigen Tools im Jumphost kann wenige Minuten dauern
 
 ---
 
@@ -109,16 +112,18 @@ EOL
 
 `source /home/syseleven/myopenrc`
 
-* Bitte gib die folgenden Zugangsdaten ein und bestätige jeweils mit **Enter**
-  * `Project ID`
-  * `Region Name`
-  * `Username`
-  * `Password` 
+* Gib für die folgenden Abfragen deine individuellen Zugangsdaten ein und bestätige jeweils mit **Enter**
+  * `<Project ID>`
+  * `<Region Name>`
+  * `<Username>`
+  * `<Password>`
 
 ---
 
 ### Verwenden des Openstack Clients
 
-* Teste nun den Openstack Client: `openstack server list`
+* Teste nun den Openstack Client mit folgendem Befehl:
+
+`openstack server list`
 
 Ergebnis: es sollte der soeben eingerichtete Jumphost angezeigt werden
