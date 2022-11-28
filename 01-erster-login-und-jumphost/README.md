@@ -98,7 +98,7 @@ EOL
 ```
 
 * aktiviere deine Umgebung für den Openstack Client: 
-  * `source myopenrc`
+  * `source /home/syseleven/myopenrc`
 * setze die folgenden Umgebungsvariablen: (Bitte trage deine individuellen Zugangsdaten ein)
   * `export OS_REGION_NAME="<Region Name>"`
   * `export OS_PROJECT_ID='<Project ID>'` 
@@ -118,3 +118,5 @@ export OS_PASSWORD='mysecret'
 ### Verwenden des Openstack Clients
 
 * Teste nun den Openstack Client: `openstack server list`
+
+Ergebnis: es sollte der soeben eingerichtete Jumphost angezeigt werden
