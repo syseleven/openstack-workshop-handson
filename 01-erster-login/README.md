@@ -14,7 +14,12 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit Openstack zu beginn
 
 ## Vorbereitung
 
-* Du brauchst die Login Daten für Openstack (Benutzer und Passwort)
+* Du brauchst die Login Daten für Openstack
+  * Benutzername
+  * Passwort
+  * Project ID
+  * Region Name
+  * Datei: `myopenrc`
 * grundlegende Kenntnisse zum Umgang mit einem Linux Terminal und SSH
 
 ---
@@ -40,10 +45,9 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit Openstack zu beginn
 ### Heat Stack starten
 
 * Klicke auf "Project" --> "Orchestration" --> "Stacks" um den Beispiel-Stack in Horizon zu erstellen
+* Klick auf "Launch Stack"
 
 ![](images/03-orchestration-stacks.png)
-
-* Klick auf "Launch Stack"
 
 ![](images/04-select-stack-template.png)
 
@@ -72,3 +76,46 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit Openstack zu beginn
 * beachte die **Floating IP** in der Spalte **IP Address** deiner neuen Instance
 * öffne ein Terminal deiner Wahl und log dich via SSH mit dem Benutzernamen `syseleven` in deine Instance ein:
 `ssh syseleven@<Floating IP> -i ~/.ssh/<private SSH key>`
+
+**Beachte:** die Bereitstellung aller nötigen Tools im Jumphost kann wenige Minuten dauern
+
+---
+
+### Einrichten und Testen des Openstack Clients
+
+* Kopiere den folgenden Inhalt in dein SSH Terminal und führe ihn aus
+
+```
+cat > /home/syseleven/myopenrc << EOL
+export OS_AUTH_URL=https://keystone.cloud.syseleven.net:5000/v3
+export OS_IDENTITY_API_VERSION=3
+export OS_INTERFACE=public
+export OS_ENDPOINT_TYPE=public
+if [ -z "$OS_REGION_NAME" ]; then unset OS_REGION_NAME; fi
+export OS_USER_DOMAIN_NAME="Default"
+unset OS_TENANT_ID
+unset OS_TENANT_NAME
+EOL
+```
+
+* aktiviere deine Umgebung für den Openstack CLient: 
+  * `source myopenrc`
+* setze die folgenden Umgebungsvariablen: (Bitte trage deine individuellen Zugangsdaten ein)
+  * `export OS_REGION_NAME="<Region Name>"`
+  * `export OS_PROJECT_ID='<Project ID>'` 
+  * `export OS_USERNAME='<Benutzername>'`
+  * `export OS_PASSWORD='<Passwort>'` 
+
+Beispiel:
+```
+export OS_REGION_NAME="abc"
+export OS_PROJECT_ID='1a2b3c4d5e6f7a8b9c1a2b3c4d5e6f7a8b9c'
+export OS_USERNAME='user@example.com'
+export OS_PASSWORD='mysecret'
+```
+
+---
+
+### Verwenden des Openstack Clients
+
+* Teste nun den Openstack Client: `openstack server list`
