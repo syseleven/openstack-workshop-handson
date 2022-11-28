@@ -82,7 +82,7 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit Openstack zu beginn
 
 ### Einrichten und Testen des Openstack Clients
 
-* Kopiere den folgenden Inhalt in dein SSH Terminal und führe ihn aus
+* Kopiere den gesamten folgenden Inhalt in dein SSH Terminal und führe ihn aus
 
 ```
 cat > /home/syseleven/myopenrc << EOL
@@ -96,7 +96,7 @@ unset OS_TENANT_ID
 unset OS_TENANT_NAME
 read -p "Please enter your OpenStack Project ID: " OS_PROJECT_ID
 export OS_PROJECT_ID
-read -p "Please enter your OpenStack Region Name: " OS_REGION_NAME
+read -p "Please enter your OpenStack Region Name ('cbk', 'dbl', 'fes'): " OS_REGION_NAME
 export OS_REGION_NAME
 read -p "Please enter your OpenStack Username: " OS_USERNAME
 export OS_USERNAME
