@@ -51,7 +51,7 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit Openstack zu beginn
 ![](images/04-select-stack-template.png)
 
 * Wähle `URL` als **Template Source** aus
-* Kopiere die URL des Beispiel-Stacks `https://raw.githubusercontent.com/syseleven/openstack-workshop-lab/main/01-erster-login/kickstart.yaml`
+* Kopiere die URL des Beispiel-Stacks `https://raw.githubusercontent.com/syseleven/openstack-workshop-lab/main/01-erster-login-und-jumphost/kickstart.yaml`
 * und füge sie in das Feld **Template URL** ein
 * Wähle `File` als **Environment Source**
 * Klick auf **NEXT**
@@ -97,7 +97,7 @@ unset OS_TENANT_NAME
 EOL
 ```
 
-* aktiviere deine Umgebung für den Openstack CLient: 
+* aktiviere deine Umgebung für den Openstack Client: 
   * `source myopenrc`
 * setze die folgenden Umgebungsvariablen: (Bitte trage deine individuellen Zugangsdaten ein)
   * `export OS_REGION_NAME="<Region Name>"`
