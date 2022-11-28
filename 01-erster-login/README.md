@@ -47,7 +47,7 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit Openstack zu beginn
 
 ![](images/04-select-stack-template.png)
 
-* Wähle "URL" als "Template Source" aus
+* Wähle `URL` als **Template Source** aus
 * Kopiere die URL des Beispiel-Stacks `https://raw.githubusercontent.com/syseleven/openstack-workshop-lab/main/01-erster-login/kickstart.yaml`
 * und füge sie in das Feld **Template URL** ein
 * Wähle `File` als **Environment Source**
@@ -62,3 +62,13 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit Openstack zu beginn
 * **image:** wähle ein beliebiges `Ubuntu Focal 20.04 (...)` Image aus
 * **key_name:** wähle den bereits vorhandenen SSH-Key `...-workshop` aus
 * Klick auf "LAUNCH"
+
+---
+
+### Überprüfen und Verbinden
+
+* Daraufhin ist der Stack im Status **Create In Progress** oder **Create Complete**
+* Klick auf **Compute** --> **Instances**
+* beachte die **Floating IP** in der Spalte **IP Address** deiner neuen Instance
+* öffne ein Terminal deiner Wahl und log dich via SSH mit dem Benutzernamen `syseleven` in deine Instance ein:
+`ssh syseleven@<Floating IP> -i ~/.ssh/<private SSH key>`
