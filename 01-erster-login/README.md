@@ -19,7 +19,6 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit Openstack zu beginn
   * Passwort
   * Project ID
   * Region Name
-  * Datei: `myopenrc`
 * grundlegende Kenntnisse zum Umgang mit einem Linux Terminal und SSH
 
 ---
