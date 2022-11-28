@@ -94,24 +94,26 @@ if [ -z "$OS_REGION_NAME" ]; then unset OS_REGION_NAME; fi
 export OS_USER_DOMAIN_NAME="Default"
 unset OS_TENANT_ID
 unset OS_TENANT_NAME
+read -p "Please enter your OpenStack Project ID: " OS_PROJECT_ID
+export OS_PROJECT_ID
+read -p "Please enter your OpenStack Region Name: " OS_REGION_NAME
+export OS_REGION_NAME
+read -p "Please enter your OpenStack Username: " OS_USERNAME
+export OS_USERNAME
+read -sp "Please enter your OpenStack Password: " OS_PASSWORD
+export OS_PASSWORD
 EOL
 ```
 
 * aktiviere deine Umgebung für den Openstack Client: 
-  * `source /home/syseleven/myopenrc`
-* setze die folgenden Umgebungsvariablen: (Bitte trage deine individuellen Zugangsdaten ein)
-  * `export OS_REGION_NAME="<Region Name>"`
-  * `export OS_PROJECT_ID='<Project ID>'` 
-  * `export OS_USERNAME='<Benutzername>'`
-  * `export OS_PASSWORD='<Passwort>'` 
 
-Beispiel:
-```
-export OS_REGION_NAME="abc"
-export OS_PROJECT_ID='1a2b3c4d5e6f7a8b9c1a2b3c4d5e6f7a8b9c'
-export OS_USERNAME='user@example.com'
-export OS_PASSWORD='mysecret'
-```
+`source /home/syseleven/myopenrc`
+
+* Bitte gib die folgenden Zugangsdaten ein und bestätige jeweils mit **Enter**
+  * `Project ID`
+  * `Region Name`
+  * `Username`
+  * `Password` 
 
 ---
 
