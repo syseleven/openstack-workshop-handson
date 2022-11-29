@@ -23,11 +23,11 @@ Mit dieser Anleitung kannst Du eine einzelne Instance per Horizon Web UI erstell
 
 * Log dich auf https://cloud.syseleven.de in die Horizon Web UI mit deinen Zugangsdaten ein
 
-![](/home/choerl/PycharmProjects/github/syseleven/openstack-workshop-lab/04-instance-per-horizon/images/001-login-windows.png)
+![](images/001-login-windows.png)
 
 * überprüfe deine aktuelle Region und wechsle ggf. auf die korrekte Region
 
-![](/home/choerl/PycharmProjects/github/syseleven/openstack-workshop-lab/04-instance-per-horizon/images/002-select-region.png)
+![](images/002-select-region.png)
 
 ---
 
@@ -36,7 +36,7 @@ Mit dieser Anleitung kannst Du eine einzelne Instance per Horizon Web UI erstell
 * Klicke auf **Project** --> **Compute** --> **Instances**
 * Klicke auf den Button **LAUNCH INSTANCE**
 
-![](/home/choerl/PycharmProjects/github/syseleven/openstack-workshop-lab/04-instance-per-horizon/images/005-launch-instance-button.png)
+![](images/005-launch-instance-button.png)
 
 ---
 
@@ -46,7 +46,7 @@ Mit dieser Anleitung kannst Du eine einzelne Instance per Horizon Web UI erstell
 * belasse den **Count** auf `1`
 * klicke dann auf **NEXT**
 
-![](/home/choerl/PycharmProjects/github/syseleven/openstack-workshop-lab/04-instance-per-horizon/images/010-launch-instance-details.png)
+![](images/010-launch-instance-details.png)
 
 ---
 
@@ -59,14 +59,14 @@ Mit dieser Anleitung kannst Du eine einzelne Instance per Horizon Web UI erstell
 per Klick auf den Pfeil (nach oben)
 * Klicke nun auf **NEXT**
 
-![](/home/choerl/PycharmProjects/github/syseleven/openstack-workshop-lab/04-instance-per-horizon/images/020-launch-instance-source.png)
+![](images/020-launch-instance-source.png)
 
 ---
 
 * wähle aus der Liste der Flavors `m1.tiny` aus und aktiviere es per Klick auf den Pfeil (nach oben)
 * Klicke nun auf **NEXT**
 
-![](/home/choerl/PycharmProjects/github/syseleven/openstack-workshop-lab/04-instance-per-horizon/images/030-launch-instance-flavor.png)
+![](images/030-launch-instance-flavor.png)
 
 ---
 
@@ -75,18 +75,18 @@ erstellte Netzwerk `workshop-kickstart-net` aus und
 * aktiviere es per Klick auf den Pfeil (nach oben)
 * Klicke nun auf **NEXT**
 
-![](/home/choerl/PycharmProjects/github/syseleven/openstack-workshop-lab/04-instance-per-horizon/images/040-launch-instance-networks.png)
+![](images/040-launch-instance-networks.png)
 
 ---
 
 * entferne die **Security Group** `default` per Klick auf den Pfeil (nach unten)
 
-![](/home/choerl/PycharmProjects/github/syseleven/openstack-workshop-lab/04-instance-per-horizon/images/050-launch-instance-security-groups.png)
+![](images/050-launch-instance-security-groups.png)
 
 * aktiviere die vorhandene **Security Group** `workshop-kickstart-allow ...` per Klick auf den Pfeil (nach oben)
 * Klicke nun auf **NEXT**
 
-![](/home/choerl/PycharmProjects/github/syseleven/openstack-workshop-lab/04-instance-per-horizon/images/051-launch-instance-security-groups.png)
+![](images/051-launch-instance-security-groups.png)
 
 ---
 
@@ -94,7 +94,7 @@ erstellte Netzwerk `workshop-kickstart-net` aus und
 * aktiviere es per Klick auf den Pfeil (nach oben)
 * Klicke abschließend auf **LAUNCH INSTANCE**
 
-![](/home/choerl/PycharmProjects/github/syseleven/openstack-workshop-lab/04-instance-per-horizon/images/060-launch-instance-key-pair.png)
+![](images/060-launch-instance-key-pair.png)
 
 ---
 
