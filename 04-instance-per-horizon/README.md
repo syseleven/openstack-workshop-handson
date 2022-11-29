@@ -79,6 +79,11 @@ erstellte Netzwerk `workshop-kickstart-net` aus und
 
 ---
 
+* der Bereich **Network Ports** muss in diesem Beispiel nicht konfiguriert werden,
+* klicke daher einfach auf **NEXT**
+
+---
+
 * entferne die **Security Group** `default` per Klick auf den Pfeil (nach unten)
 
 ![](images/050-launch-instance-security-groups.png)
@@ -92,7 +97,8 @@ erstellte Netzwerk `workshop-kickstart-net` aus und
 
 * wähle das vorhandene Key Pair `workshop` aus und
 * aktiviere es per Klick auf den Pfeil (nach oben)
-* Klicke abschließend auf **LAUNCH INSTANCE**
+* die übrigen Einstellungsmenüs sind für dieses Beispiel nicht erforderlich,
+* klicke darum gleich abschließend auf **LAUNCH INSTANCE**
 
 ![](images/060-launch-instance-key-pair.png)
 
