@@ -212,41 +212,12 @@ resources:
            path: /root/helmclient-install.sh
            owner: root
            permissions: 0700
-         - content: |
-              #!/usr/bin/env bash
-              cd /tmp
-              echo "# Downloading s3 client"
-              curl -O -L https://github.com/s3tools/s3cmd/releases/download/v2.0.2/s3cmd-2.0.2.tar.gz
-              echo "# Installing helm client"
-              tar xzf s3cmd-2.0.2.tar.gz
-              cd s3cmd-2.0.2
-              cp -R s3cmd S3 /usr/local/bin
-              if which s3cmd >/dev/null; then (echo "# Finished s3 client setup"; exit 0) else (echo "# Error while installing s3 client"; exit 99); fi
-              echo "# Configuring s3 client"
-              touch /home/syseleven/.s3cfg
-              cat > /home/syseleven/.s3cfg << EOL
-              [default]
-              access_key = REPLACE
-              secret_key = REPLACE
-              use_https = True
-              check_ssl_certificate = True
-              check_ssl_hostname = False
-              host_base = s3.REPLACE.cloud.syseleven.net
-              host_bucket = %(bucket).s3.REPLACE.cloud.syseleven.net
-              website_endpoint = http://s3.REPLACE.cloud.syseleven.net/%(bucket)s/%(location)s/
-              website_endpoint = http://%(bucket)s.s3.REPLACE.cloud.syseleven.net/%(location)s/
-              EOL
-              chown syseleven:syseleven /home/syseleven/.s3cfg
-           path: /root/s3client-install.sh
-           owner: root
-           permissions: 0700
        runcmd:
          - /root/inject_userkey
          - /root/terra-install.sh
          - /root/openstackclient-install.sh
          - /root/kubectlclient-install.sh
          - /root/helmclient-install.sh
-         - /root/s3client-install.sh
        packages:
          - git
          - wget
