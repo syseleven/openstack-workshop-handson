@@ -1,14 +1,14 @@
-heat_template_version: 2016-10-14
+heat_template_version: 2016-04-08
 #
 # You can deploy this template using one of the following commands:
 #
 # SSH public Key file uploaded to Dashboard (Horizon) - RSA only
-# 'openstack stack create -t kickstart.yaml --parameter key_name=<publicKeyName> <stackName>'
+# 'openstack stack create -t kickstart-ipv6.yaml --parameter key_name=<publicKeyName> <stackName>'
 #
 # or you can just paste it into the web-ui under "orchestration" >> "launch stack"
 #
-# after successful stack creation you can login with
-# ssh -l syseleven <floatingIP> -A -i ~/.ssh/<private-key>
+# after successful stack creation you can log in with
+# ssh -l syseleven <floatingIP> -A
 #
 
 description: Simple template to deploy a single compute instance with a user named syseleven including the openstack-CLI-tools.
@@ -22,7 +22,7 @@ parameters:
 
   image:
     type: string
-    default: Focal 20.04 (2022-11-25)
+    default: Jammy 22.04 (2022-08-11)
     constraints:
       - custom_constraint: glance.image
   flavor:
@@ -43,8 +43,12 @@ resources:
       name:
         list_join: [ '-', [ { get_param: "OS::stack_name" }, 'kickstart', 'allow incoming traffic, tcp port 22 and icmp']]
       rules:
-        - { direction: ingress, remote_ip_prefix: 0.0.0.0/0, port_range_min: 22, port_range_max: 22, protocol: tcp }
-        - { direction: ingress, remote_ip_prefix: 0.0.0.0/0, protocol: icmp }
+      #IPv4 rule
+        - { direction: ingress, ethertype: IPv4, remote_ip_prefix: 0.0.0.0/0, port_range_min: 22, port_range_max: 22, protocol: tcp }
+        - { direction: ingress, ethertype: IPv4, remote_ip_prefix: 0.0.0.0/0, protocol: icmp }
+      #IPv6 rule
+        - { direction: ingress, ethertype: IPv6, remote_ip_prefix: "::/0", port_range_min: 22, port_range_max: 22, protocol: tcp }
+        - { direction: ingress, ethertype: IPv6, remote_ip_prefix: "::/0", protocol: icmp }
 
   host:
     type: OS::Nova::Server
@@ -102,9 +106,9 @@ resources:
               # correct permissions   
               chown -R syseleven: /home/syseleven
               # disable ubuntu landscape scripts
-              if [ $(curl -sL -w "%{http_code}" "https://github.com/syseleven/openstack-workshop-lab/blob/main/01-erster-login-und-jumphost/motd.txt" -o /dev/null) -eq 200 ]; then
+              if [ $(curl -sL -w "%{http_code}" "https://raw.githubusercontent.com/syseleven/heat-examples/master/kickstart/motd.txt" -o /dev/null) -eq 200 ]; then
               echo "# S11 motd content found, writing"
-              curl -s "https://github.com/syseleven/openstack-workshop-lab/blob/main/01-erster-login-und-jumphost/motd.txt" > /etc/motd
+              curl -s "https://raw.githubusercontent.com/syseleven/heat-examples/master/kickstart/motd.txt" > /etc/motd
               chmod 400 /etc/update-motd.d/*
               else
               echo "# Could not download S11 motd content, writing generic motd"
@@ -174,79 +178,10 @@ resources:
            path: /root/openstackclient-install.sh
            owner: root
            permissions: 0700
-         - content: |
-              #!/usr/bin/env bash
-              cd /tmp
-              echo "# Downloading kubectl client"
-              curl -LO https://dl.k8s.io/release/v1.23.10/bin/linux/amd64/kubectl
-              echo "# Installing kubectl client"
-              sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-              if which kubectl >/dev/null; then (echo "# Finished kubectl client setup"; exit 0) else (echo "# Error while installing kubectl client"; exit 99); fi
-              echo "# Configuring kubectl and installing plugins"
-              mkdir /home/syseleven/.kube
-              chown syseleven:syseleven /home/syseleven/.kube
-              chmod 700 /home/syseleven/.kube
-              echo "# adding kubectl alias and autocompletion"
-              echo "source <(kubectl completion bash)" >> /home/syseleven/.bashrc
-              echo "alias k=kubectl" >>  /home/syseleven/.bashrc
-              echo "complete -o default -F __start_kubectl k" >> /home/syseleven/.bashrc
-              echo "# Downloading and installing kubectx and kubens"
-              curl -LO https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx_v0.9.4_linux_x86_64.tar.gz
-              tar -zxvf kubectx_v0.9.4_linux_x86_64.tar.gz 
-              mv kubectx /usr/local/bin/kubectx
-              curl -LO https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens_v0.9.4_linux_x86_64.tar.gz
-              tar -zxvf kubens_v0.9.4_linux_x86_64.tar.gz
-              mv kubens /usr/local/bin/kubens
-           path: /root/kubectlclient-install.sh
-           owner: root
-           permissions: 0700
-         - content: |
-              #!/usr/bin/env bash
-              cd /tmp
-              echo "# Downloading helm client"
-              curl -LO https://get.helm.sh/helm-v3.10.2-linux-amd64.tar.gz
-              echo "# Installing helm client"
-              tar -zxvf helm-v3.10.2-linux-amd64.tar.gz
-              mv linux-amd64/helm /usr/local/bin/helm
-              if which helm >/dev/null; then (echo "# Finished helm client setup"; exit 0) else (echo "# Error while installing helm client"; exit 99); fi
-           path: /root/helmclient-install.sh
-           owner: root
-           permissions: 0700
-         - content: |
-              #!/usr/bin/env bash
-              cd /tmp
-              echo "# Downloading s3 client"
-              curl -O -L https://github.com/s3tools/s3cmd/releases/download/v2.0.2/s3cmd-2.0.2.tar.gz
-              echo "# Installing helm client"
-              tar xzf s3cmd-2.0.2.tar.gz
-              cd s3cmd-2.0.2
-              cp -R s3cmd S3 /usr/local/bin
-              if which s3cmd >/dev/null; then (echo "# Finished s3 client setup"; exit 0) else (echo "# Error while installing s3 client"; exit 99); fi
-              echo "# Configuring s3 client"
-              touch /home/syseleven/.s3cfg
-              cat > /home/syseleven/.s3cfg << EOL
-              [default]
-              access_key = REPLACE
-              secret_key = REPLACE
-              use_https = True
-              check_ssl_certificate = True
-              check_ssl_hostname = False
-              host_base = s3.REPLACE.cloud.syseleven.net
-              host_bucket = %(bucket).s3.REPLACE.cloud.syseleven.net
-              website_endpoint = http://s3.REPLACE.cloud.syseleven.net/%(bucket)s/%(location)s/
-              website_endpoint = http://%(bucket)s.s3.REPLACE.cloud.syseleven.net/%(location)s/
-              EOL
-              chown syseleven:syseleven /home/syseleven/.s3cfg
-           path: /root/s3client-install.sh
-           owner: root
-           permissions: 0700
        runcmd:
          - /root/inject_userkey
          - /root/terra-install.sh
          - /root/openstackclient-install.sh
-         - /root/kubectlclient-install.sh
-         - /root/helmclient-install.sh
-         - /root/s3client-install.sh
        packages:
          - git
          - wget
@@ -282,6 +217,21 @@ resources:
       allocation_pools:
       - {start: 10.0.0.10, end: 10.0.0.250}
 
+  subnet6:
+    type: OS::Neutron::Subnet
+    depends_on: [ net ]
+    properties:
+      ip_version: 6
+      # possible values: slaac, dhcpv6-stateless, dhcpv6-stateful
+      ipv6_address_mode: dhcpv6-stateful
+      ipv6_ra_mode: dhcpv6-stateful
+      name:
+        list_join: [ '-', [ { get_param: "OS::stack_name" }, 'kickstart', 'subnet6']]
+      network: { get_resource: net }
+      # Use this to use one of our globally routable addresses:
+      subnetpool: "subnet-pool-v6_1"
+      gateway_ip: null
+
   router:
     type: OS::Neutron::Router
     properties:
@@ -295,6 +245,14 @@ resources:
     properties:
       router: { get_resource: router }
       subnet: { get_resource: subnet }
+
+  # This is extra for IPv6:
+  router_subnet6_bridge:
+    type: OS::Neutron::RouterInterface
+    depends_on: [ subnet6, router ]
+    properties:
+      router: { get_resource: router }
+      subnet: { get_resource: subnet6 }
 
   floating_ip:
     type: OS::Neutron::FloatingIP
