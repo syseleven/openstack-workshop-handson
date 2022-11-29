@@ -20,6 +20,14 @@ Mit dieser Anleitung kannst Du eine einzelne Instance per Openstack Client erste
 
 ---
 
+### Start
+
+* Log dich auf dem Jumphost aus der Aufgabe [01-erster-login-und-jumphost](/01-erster-login-und-jumphost) ein
+
+`ssh syseleven@<Jumphost-IP> -A -i /pfad/zum/private-key`
+
+---
+
 ### Informationen zur vorhandenen Infrastruktur sammeln
 
 Um die zu erstellende Instance in die vorhandene Netzwerktopologie zu integrieren,
@@ -63,7 +71,7 @@ openstack server create \
   --network "<REPLACE>" \
   --security-group "<REPLACE>" \
   --key-name "<REPLACE>" \
-  server2
+  server-cli
 ```
 
 Beispiel:
@@ -75,7 +83,7 @@ openstack server create \
   --network "workshop-kickstart-net" \
   --security-group "abad8853-af7c-4e92-8afc-4ea6316dbb15" \
   --key-name "workshop" \
-  server2
+  server-cli
 ```
 
 ---
@@ -90,7 +98,7 @@ Nun überprüfen wir den Zustand der neuen Instance
 
 * Anzeigen der Instance Details
 
-`openstack server show server2`
+`openstack server show server-cli`
 
 #### Was fällt auf?
 
