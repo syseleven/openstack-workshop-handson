@@ -75,7 +75,7 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit Openstack zu beginn
 * beachte die **Floating IP** in der Spalte **IP Address** deiner neuen Instance
 * öffne ein Terminal deiner Wahl und log dich via SSH mit dem Benutzernamen `syseleven` in deine Jumphost-Instance ein:
 
-`ssh syseleven@<Floating IP> -A -i ~/.ssh/<private SSH key>`
+`ssh syseleven@<Floating IP>`
 
 **Beachte:**
 

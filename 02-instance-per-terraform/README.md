@@ -95,6 +95,8 @@ resource "openstack_compute_floatingip_associate_v2" "fipas_simple_instance" {
 
 * Im Horizon Dashboard die Instanz suchen und mit SSH und Private Key mit der FloatingIP verbinden (Username: `ubuntu`)
 
+`ssh ubuntu@<Floating IP>`
+
 ### Aufräumen
 
 * Terraform die erstellten Resourcen abbauen lassen: `terraform destroy`
