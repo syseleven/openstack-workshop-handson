@@ -58,16 +58,16 @@ Terraform möchte gleich gerne einen `IMAGE_ID` Parameter von uns haben, diesen 
   * `INSTANCE_NAME` - Freitext, Name der Instance
   * `IMAGE_ID` - ID, siehe vorheriger Schritt
   * `FLAVOR_NAME` - Gültiger Openstack Flavor, bevorzugt: `m1.tiny`
-  * `KEYPAIR_NAME` - Gültiger Openstack Keypair Name, z.B. `...-workshop`
+  * `KEYPAIR_NAME` - Gültiger Openstack Keypair Name, in diesem Fall: `workshop`
   * `NETWORK_NAME` - Name des bestehenden Netzes: `workshop-kickstart-net`
 * Das Ergebnis sieht zum Beispiel so aus:
 
 ```tf
 resource "openstack_compute_instance_v2" "simple_instance" {
-  name            = "mmustermann test instance"
+  name            = "Test Instance"
   image_id        = "5809b59b-d8c3-459a-9666-6e21c905736b"
   flavor_name     = "m1.tiny"
-  key_pair        = "mmustermann_key"
+  key_pair        = "workshop"
 
   network {
     name = "workshop-kickstart-router"
@@ -86,15 +86,16 @@ resource "openstack_compute_floatingip_associate_v2" "fipas_simple_instance" {
 
 ### Instanz per Terraform ausrollen
 
+* Terraform Projekt lokal initialisieren (einmalig): `terraform init`
 * Zuerst checken, was Terraform tun würde: `terraform plan`
 * Terraform die Instance ausrollen lassen: `terraform apply`
-* Bei interaktiver Frage mit `yes` antworten
+  * Bei interaktiver Frage mit `yes` antworten
 
 ### Überprüfen
 
-* Im Horizon Dashboard die Instanz suchen und mit SSH und Private Key mit der FloatingIP verbinden
+* Im Horizon Dashboard die Instanz suchen und mit SSH und Private Key mit der FloatingIP verbinden (Username: `ubuntu`)
 
 ### Aufräumen
 
 * Terraform die erstellten Resourcen abbauen lassen: `terraform destroy`
-* Auch hier bei interaktiver Frage mit `yes` antworten
+  * Auch hier bei interaktiver Frage mit `yes` antworten
