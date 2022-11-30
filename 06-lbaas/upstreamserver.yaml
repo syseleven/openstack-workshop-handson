@@ -33,7 +33,6 @@ parameters:
     type: string
 
 resources:
-
   upstreamserver:
     type: OS::Nova::Server
     depends_on: [ server_port ]
@@ -62,7 +61,7 @@ resources:
                 shell: /bin/bash
                 lock-passwd: false
           write_files:
-              - content: { get_file: http://sources/AnyApp/index.php }
+              - content: phpinfo();
                 permissions: 0700
                 path: /var/www/html/index.php
                 owner: "www-data:www-data"
