@@ -145,7 +145,7 @@ resources:
     properties:
       count: { get_param: number_upstreams }
       resource_def:
-        type: upstreamserver.yaml
+        type: https://raw.githubusercontent.com/syseleven/openstack-workshop-lab/main/06-lbaas/upstreamserver.yaml
         properties:
           name: upstream%index%
           flavor: { get_param: flavor }
