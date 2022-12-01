@@ -64,6 +64,7 @@ resources:
                 - nginx
           runcmd:
            - 'systemctl status nginx'
+           - 'cat /etc/hostname > /var/www/html/index.html'
 
   server_port:
     type: OS::Neutron::Port
