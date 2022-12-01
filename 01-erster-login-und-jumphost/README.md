@@ -118,6 +118,9 @@ EOL
   * `<Username>`
   * `<Password>`
 
+Hinweis: diese Angaben (außer Passwort) findest Du auch in Horizon unter 
+**Project** --> **API Access** --> **VIEW CREDENTIALS**
+
 ---
 
 ### Verwenden des Openstack Clients
