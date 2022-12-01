@@ -107,9 +107,11 @@ Der Loadbalancer wurde ebenfalls erstellt und kann unter **Network** --> **Octav
 #### Ziel
 
 * lade die aufgerufene Website im Browser neu
-* der Inhalt der Website sollte den Hostnamen des jeweiligen Webservers ausgeben und diesen Wechseln
+* der Inhalt der Website sollte den Hostnamen des jeweiligen Webservers ausgeben und diesen wechseln
 
 `upstream0` -> `upstream1` und so weiter...
+
+---
 
 #### Weitere Aufgaben
 
