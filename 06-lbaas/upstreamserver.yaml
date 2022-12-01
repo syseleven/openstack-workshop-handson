@@ -15,7 +15,7 @@ parameters:
   image:
     type: string
     description: Image used for servers
-    default: Ubuntu Jammy 22.04 (2022-08-11)
+    default: Ubuntu Focal 20.04 (2022-11-29)
     constraints:
     - custom_constraint: glance.image
   pool:
@@ -60,20 +60,10 @@ resources:
                 sudo: ALL=(ALL) NOPASSWD:ALL
                 shell: /bin/bash
                 lock-passwd: false
-          write_files:
-              - content: phpinfo();
-                permissions: 0700
-                path: /var/www/html/index.php
-                owner: "www-data:www-data"
           packages:
-                - wget
-                - curl
-                - apache2
-                - "php7.0-fpm"
-                - "libapache2-mod-php7.0"
+                - nginx
           runcmd:
-           - 'systemctl status apache2'
-           - 'systemctl status php7.0-fpm'
+           - 'systemctl status nginx'
 
   server_port:
     type: OS::Neutron::Port
