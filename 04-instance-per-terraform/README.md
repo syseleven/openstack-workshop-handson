@@ -89,11 +89,11 @@ resource "openstack_compute_floatingip_associate_v2" "fipas_simple_instance" {
 * Terraform Projekt lokal initialisieren (einmalig): `terraform init`
 * Zuerst checken, was Terraform tun würde: `terraform plan`
 * Terraform die Instance ausrollen lassen: `terraform apply`
-  * Bei interaktiver Frage mit `yes` antworten
+* Bei interaktiver Frage mit `yes` antworten
 
 ### Überprüfen
 
-* Im Horizon Dashboard die Instanz suchen und mit SSH und Private Key mit der FloatingIP verbinden (Username: `ubuntu`)
+* im Horizon Dashboard die Instanz suchen und mit SSH und Private Key mit der FloatingIP verbinden (Username: `ubuntu`)
 
 `ssh ubuntu@<Floating IP>`
 
