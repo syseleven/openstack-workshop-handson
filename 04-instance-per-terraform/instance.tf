@@ -1,5 +1,5 @@
 resource "openstack_compute_instance_v2" "simple_instance" {
-  name            = "server-terraform"
+  name            = "INSTANCE_NAME"
   image_id        = "IMAGE_ID"
   flavor_name     = "FLAVOR_NAME"
   key_pair        = "KEYPAIR_NAME"

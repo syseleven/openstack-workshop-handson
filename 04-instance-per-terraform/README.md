@@ -70,7 +70,7 @@ resource "openstack_compute_instance_v2" "simple_instance" {
   key_pair        = "workshop"
 
   network {
-    name = "workshop-kickstart-router"
+    name = "workshop-kickstart-net"
   }
 }
 
