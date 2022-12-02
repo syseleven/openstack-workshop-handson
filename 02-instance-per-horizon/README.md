@@ -104,6 +104,10 @@ erstellte Netzwerk `workshop-kickstart-net` aus und
 
 ---
 
+### Was fällt auf?
+
+* die Instance hat keine public IP
+
 ### Weitere Aufgaben
 
 * lasse die Instance in Horizon anzeigen und notiere ihre IP-Adresse
@@ -111,3 +115,5 @@ erstellte Netzwerk `workshop-kickstart-net` aus und
 * log dich vom Jumphost aus auf der Instance ein
 
 `ssh ubuntu@<Instance-IP>`
+
+* warum ist der Benutzername hier `ubuntu`?
