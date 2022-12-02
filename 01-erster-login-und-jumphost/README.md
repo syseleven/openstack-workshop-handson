@@ -77,6 +77,19 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit OpenStack zu beginn
 
 `ssh syseleven@<Workshop-Kickstart-FloatingIP> -A -i /pfad/zum/private-key`
 
+---
+
+Ggf. musst Du die folgende Meldung des SSH-Servers mit `yes` bestätigen:
+
+```
+The authenticity of host 'x.x.x.x (x.x.x.x)' can't be established.
+ED25519 key fingerprint is SHA256:xxxxxx/xxxxxx.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+```
+
+---
+
 **Beachte:**
 
 die Bereitstellung aller nötigen Tools im Jumphost kann wenige Minuten dauern
@@ -85,7 +98,8 @@ die Bereitstellung aller nötigen Tools im Jumphost kann wenige Minuten dauern
 
 ### Einrichten und Testen des OpenStack Clients
 
-* Kopiere den gesamten folgenden Inhalt in dein SSH Terminal und führe ihn aus
+* wenn Du erfolgreich mit dem SysEleven-Jumphost verbunden bist,
+* kopiere den gesamten folgenden Inhalt in dein SSH Terminal und führe ihn aus
 
 ```
 cat > /home/syseleven/myopenrc << EOL
