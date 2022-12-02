@@ -1,16 +1,16 @@
-# Erstellen einer Instance per Openstack Client
+# Erstellen einer Instance per OpenStack Client
 
 ## Übersicht
 
-Mit dieser Anleitung kannst Du eine einzelne Instance per Openstack Client erstellen.
+Mit dieser Anleitung kannst Du eine einzelne Instance per OpenStack Client erstellen.
 
 ## Ziel
 
-* Erstelle eine Instance mittels Openstack Befehlen
+* Erstelle eine Instance mittels OpenStack Befehlen
 
 ## Vorbereitung
 
-* Du brauchst die Login Daten für Openstack
+* Du brauchst die Login Daten für OpenStack
   * Benutzername
   * Passwort
   * Project ID
@@ -61,7 +61,7 @@ Mit den folgenden Befehlen erhalten wir Informationen darüber.
 
 ### Erstellen der neuen Instance
 
-Nun erstellen wir direkt mit Befehlen des Openstack Clients eine neue Instance. 
+Nun erstellen wir direkt mit Befehlen des OpenStack Clients eine neue Instance. 
 Trage in den folgenden Zeilen die zuvor gesammelten Informationen ein.
 
 ```

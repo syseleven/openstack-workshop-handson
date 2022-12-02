@@ -10,7 +10,7 @@ Mit dieser Anleitung kannst Du eine einzelne Instance per Terraform erstellen.
 
 ## Vorbereitung
 
-* Du brauchst die Login Daten für Openstack
+* Du brauchst die Login Daten für OpenStack
   * Benutzername
   * Passwort
   * Project ID
@@ -27,10 +27,10 @@ Mit dieser Anleitung kannst Du eine einzelne Instance per Terraform erstellen.
   * Führe das Kommando aus: `git clone https://github.com/syseleven/openstack-workshop-lab.git`
   * Wechsele in den richtigen Ordner für diese Aufgabe: `cd openstack-workshop-lab/02-instance-per-terraform`
 
-### Umgebung für den Openstack Client aktivieren
+### Umgebung für den OpenStack Client aktivieren
 
 * **Hinweis:** Solltest du die gleiche Session aus der vorherigen Aufgabe verwenden, kannst du diesen Schritt überspringen
-* Wenn du eine neue Session auf dem Jumphost hast, musst du für die Verbindung zum Openstack wieder das RC-File sourcen:
+* Wenn du eine neue Session auf dem Jumphost hast, musst du für die Verbindung zum OpenStack wieder das RC-File sourcen:
   * `source /home/syseleven/myopenrc`
   * Interaktive Abfragen beantworten
 
@@ -57,8 +57,8 @@ Terraform möchte gleich gerne einen `IMAGE_ID` Parameter von uns haben, diesen 
 * Passe die Werte in CAPS an:
   * `INSTANCE_NAME` - Freitext, Name der Instance
   * `IMAGE_ID` - ID, siehe vorheriger Schritt
-  * `FLAVOR_NAME` - Gültiger Openstack Flavor, bevorzugt: `m1.tiny`
-  * `KEYPAIR_NAME` - Gültiger Openstack Keypair Name, in diesem Fall: `workshop`
+  * `FLAVOR_NAME` - Gültiger OpenStack Flavor, bevorzugt: `m1.tiny`
+  * `KEYPAIR_NAME` - Gültiger OpenStack Keypair Name, in diesem Fall: `workshop`
   * `NETWORK_NAME` - Name des bestehenden Netzes: `workshop-kickstart-net`
 * Das Ergebnis sieht zum Beispiel so aus:
 

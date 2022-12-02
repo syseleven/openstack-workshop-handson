@@ -1,20 +1,20 @@
-# Erster Login in Openstack und Jumphost
+# Erster Login in OpenStack und Jumphost
 
 ## Übersicht
 
 Mit dieser Anleitung kannst Du eine einzelne Instance mit einem vorinstallierten 
-Openstack Client über das Horizon Dashboard (GUI) erstellen.
+OpenStack Client über das Horizon Dashboard (GUI) erstellen.
 
-Dieser "Jumphost" enthält alle erforderlichen Tools, um mit Openstack zu beginnen.
+Dieser "Jumphost" enthält alle erforderlichen Tools, um mit OpenStack zu beginnen.
 
 ## Ziel
 
 * erstelle eine Jumphost Instance via Horizon (GUI)
-* automatisierte Installation des Openstack Clients in der neuen Instance
+* automatisierte Installation des OpenStack Clients in der neuen Instance
 
 ## Vorbereitung
 
-* Du brauchst die Login Daten für Openstack
+* Du brauchst die Login Daten für OpenStack
   * Benutzername
   * Passwort
   * Project ID
@@ -60,7 +60,7 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit Openstack zu beginn
 ![](images/05-launch-stack.png)
 
 * trage in das Feld **Stack Name** den Namen `workshop` ein
-* trage dein Openstack Password in das Feld **Password for User ...** ein
+* trage dein OpenStack Password in das Feld **Password for User ...** ein
 * **flavor:** wähle den Flavor `m1.tiny` aus
 * **image:** wähle ein beliebiges `Ubuntu Focal 20.04 (...)` Image aus
 * **key_name:** wähle den bereits vorhandenen SSH-Key `...-workshop` aus
@@ -83,7 +83,7 @@ die Bereitstellung aller nötigen Tools im Jumphost kann wenige Minuten dauern
 
 ---
 
-### Einrichten und Testen des Openstack Clients
+### Einrichten und Testen des OpenStack Clients
 
 * Kopiere den gesamten folgenden Inhalt in dein SSH Terminal und führe ihn aus
 
@@ -108,7 +108,7 @@ export OS_PASSWORD
 EOL
 ```
 
-* aktiviere deine Umgebung für den Openstack Client: 
+* aktiviere deine Umgebung für den OpenStack Client: 
 
 `source /home/syseleven/myopenrc`
 
@@ -123,9 +123,9 @@ Hinweis: diese Angaben (außer Passwort) findest Du auch in Horizon unter
 
 ---
 
-### Verwenden des Openstack Clients
+### Verwenden des OpenStack Clients
 
-* Teste nun den Openstack Client mit folgendem Befehl:
+* Teste nun den OpenStack Client mit folgendem Befehl:
 
 `openstack server list`
 

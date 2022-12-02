@@ -12,7 +12,7 @@ Mit dieser Anleitung kannst Du Volumes per Horizon Web UI erstellen und in einer
 
 ## Vorbereitung
 
-* Du brauchst die Login Daten für Openstack
+* Du brauchst die Login Daten für OpenStack
   * Benutzername
   * Passwort
   * Project ID

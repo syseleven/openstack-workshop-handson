@@ -10,7 +10,7 @@ Mit dieser Anleitung kannst Du eine einzelne Instance per Horizon Web UI erstell
 
 ## Vorbereitung
 
-* Du brauchst die Login Daten für Openstack
+* Du brauchst die Login Daten für OpenStack
   * Benutzername
   * Passwort
   * Project ID

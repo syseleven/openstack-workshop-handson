@@ -1,12 +1,12 @@
-# Openstack Workshop
+# OpenStack Workshop
 
 ## Inhaltsbeschreibung
 
-Dieser Workshop soll dir einen Überblick über die Cloudplattform Openstack geben 
+Dieser Workshop soll dir einen Überblick über die Cloudplattform OpenStack geben 
 und deren Komponenten vorstellen.
 
 In Praxisbeispielen werden die wichtigsten Aktionen, Konfigurationen und Einsatzzwecke
-im Umgang mit Openstack anschaulich vermittelt.
+im Umgang mit OpenStack anschaulich vermittelt.
 
 ## Voraussetzungen
 
@@ -20,4 +20,4 @@ Die SSH Verbindung wird mit SSH Key Authentifizierung durchgeführt.
 
 Weitere Ressourcen und Informationen
 
-* [SysEleven Openstack Cloud Dokumentation](https://docs.syseleven.de/syseleven-stack/en)
+* [SysEleven OpenStack Cloud Dokumentation](https://docs.syseleven.de/syseleven-stack/en)

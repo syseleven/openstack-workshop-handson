@@ -11,7 +11,7 @@ Mit dieser Anleitung kannst Du eine einfache Webapplikation über einen Loadbala
 
 ## Vorbereitung
 
-* Du brauchst die Login Daten für Openstack
+* Du brauchst die Login Daten für OpenStack
   * Benutzername
   * Passwort
   * Project ID
@@ -59,7 +59,7 @@ Mit dieser Anleitung kannst Du eine einfache Webapplikation über einen Loadbala
 
 * trage in das Feld **Stack Name** den Namen `webserver` ein
 * bearbeite nun die folgenden Eingabefelder:
-* trage dein Openstack Passwort in das Feld **Password for user...** ein
+* trage dein OpenStack Passwort in das Feld **Password for user...** ein
 * wähle als **flavor** `m1.tiny`
 * wähle als **image** ein beliebiges `Ubuntu Focal 20.04 ...` Image aus
 * wähle für **key_name** den vorhandenen Workshop SSH Key aus und
