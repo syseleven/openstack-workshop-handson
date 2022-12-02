@@ -63,7 +63,7 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit OpenStack zu beginn
 * trage dein OpenStack Password in das Feld **Password for User ...** ein
 * **flavor:** wähle den Flavor `m1.tiny` aus
 * **image:** wähle ein beliebiges `Ubuntu Focal 20.04 (...)` Image aus
-* **key_name:** wähle den bereits vorhandenen SSH-Key `...-workshop` aus
+* **key_name:** wähle den bereits vorhandenen SSH-Key `workshop` aus
 * Klick auf "LAUNCH"
 
 ---
@@ -75,7 +75,7 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit OpenStack zu beginn
 * beachte die **Floating IP** in der Spalte **IP Address** deiner neuen Instance
 * öffne ein Terminal deiner Wahl und log dich via SSH mit dem Benutzernamen `syseleven` in deine Jumphost-Instance ein:
 
-`ssh syseleven@<Floating IP>`
+`ssh syseleven@<Workshop-Kickstart-FloatingIP> -A -i /pfad/zum/private-key`
 
 **Beachte:**
 
