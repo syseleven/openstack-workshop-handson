@@ -170,5 +170,5 @@ sudo umount /mnt
 ### Fazit
 
 * das Volume kann nun persistent Daten speichern
-* Volumes können von einer Instance an einer andere Instance gebunden werden
+* Volumes können von einer Instance an eine andere Instance gebunden werden
 * auch multi-attach Volumes mit speziellem Filesystem sind möglich
