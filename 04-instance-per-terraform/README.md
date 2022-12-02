@@ -51,16 +51,34 @@ Terraform möchte gleich gerne einen `IMAGE_ID` Parameter von uns haben, diesen 
 +--------------------------------------+----------------------------------+--------+
 ```
 
+### SECGROUP_ID Parameter für die Instanz erhalten
+
+Terraform möchte gleich gerne einen `SECGROUP_ID` Parameter von uns haben, diesen besorgen wir uns wie folgt:
+
+* Folgendes ausführen: `openstack security group list`
+* Suche im Output nach der Security Group mit dem Namen `workshop-kickstart-allow ...` und kopiere die ID
+
+```plain
++--------------------------------------+-----------------------------------------------------------------+----------------------------------------------------+----------------------------------+------+
+| ID                                   | Name                                                            | Description                                        | Project                          | Tags |
++--------------------------------------+-----------------------------------------------------------------+----------------------------------------------------+----------------------------------+------+
+<...>
+| ccceaba9-8413-4cf4-8c67-84bc425afe53 | workshop-kickstart-allow incoming traffic, tcp port 22 and icmp | allow incoming SSH and ICMP traffic from anywhere. | 7f1b76e71afb4749b852f04740e1af09 | []   |
+<...>
++--------------------------------------+-----------------------------------------------------------------+----------------------------------------------------+----------------------------------+------+
+```
+
+
 ### Parameter für die Instanz anpassen
 
 * Öffne die Datei `instance.tf` im Editor: `vi instance.tf`
 * Passe die Werte in CAPS an:
   * `INSTANCE_NAME` - Freitext, Name der Instance
-  * `IMAGE_ID` - ID, siehe vorheriger Schritt
+  * `IMAGE_ID` - ID, siehe vorletzter Schritt
   * `FLAVOR_NAME` - Gültiger OpenStack Flavor, bevorzugt: `m1.tiny`
   * `KEYPAIR_NAME` - Gültiger OpenStack Keypair Name, in diesem Fall: `workshop`
   * `NETWORK_NAME` - Name des bestehenden Netzes: `workshop-kickstart-net`
-  * `SECGROUP_NAME` - Name der Security Group: in diesem Fall: `workshop-kickstart-allow`
+  * `SECGROUP_ID` - ID der Security Group, siehe vorheriger Schritt
 * Das Ergebnis sieht zum Beispiel so aus:
 
 ```tf
@@ -69,7 +87,7 @@ resource "openstack_compute_instance_v2" "simple_instance" {
   image_id        = "5809b59b-d8c3-459a-9666-6e21c905736b"
   flavor_name     = "m1.tiny"
   key_pair        = "workshop"
-  security_groups = ["workshop-kickstart-allow"]
+  security_groups = ["ccceaba9-8413-4cf4-8c67-84bc425afe53"]
 
   network {
     name = "workshop-kickstart-net"
