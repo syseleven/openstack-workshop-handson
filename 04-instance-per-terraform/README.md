@@ -60,6 +60,7 @@ Terraform möchte gleich gerne einen `IMAGE_ID` Parameter von uns haben, diesen 
   * `FLAVOR_NAME` - Gültiger OpenStack Flavor, bevorzugt: `m1.tiny`
   * `KEYPAIR_NAME` - Gültiger OpenStack Keypair Name, in diesem Fall: `workshop`
   * `NETWORK_NAME` - Name des bestehenden Netzes: `workshop-kickstart-net`
+  * `SECGROUP_NAME` - Name der Security Group: in diesem Fall: `workshop-kickstart-allow`
 * Das Ergebnis sieht zum Beispiel so aus:
 
 ```tf
@@ -68,6 +69,7 @@ resource "openstack_compute_instance_v2" "simple_instance" {
   image_id        = "5809b59b-d8c3-459a-9666-6e21c905736b"
   flavor_name     = "m1.tiny"
   key_pair        = "workshop"
+  security_groups = ["workshop-kickstart-allow"]
 
   network {
     name = "workshop-kickstart-net"
