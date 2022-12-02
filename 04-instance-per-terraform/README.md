@@ -25,7 +25,7 @@ Mit dieser Anleitung kannst Du eine einzelne Instance per Terraform erstellen.
 * Verbinde dich per SSH mit deiner Jumphost VM aus der vorherigen Aufgabe (wenn noch nicht geschehen)
 * Für die folgenenden Schritte benötigst du die Dateien aus diesem Repository, daher musst du es auf deinem Jumphost klonen:
   * Führe das Kommando aus: `git clone https://github.com/syseleven/openstack-workshop-lab.git`
-  * Wechsele in den richtigen Ordner für diese Aufgabe: `cd openstack-workshop-lab/02-instance-per-terraform`
+  * Wechsele in den richtigen Ordner für diese Aufgabe: `cd openstack-workshop-lab/04-instance-per-terraform`
 
 ### Umgebung für den OpenStack Client aktivieren
 
