@@ -113,7 +113,7 @@ resource "openstack_compute_floatingip_associate_v2" "fipas_simple_instance" {
 
 ### Überprüfen
 
-* im Horizon Dashboard die Instanz suchen und mit SSH und Private Key mit der FloatingIP verbinden (Username: `ubuntu`)
+* im Horizon Dashboard die Instanz suchen und mit SSH und Private Key mit der **internen IP Adresse**  verbinden (Username: `ubuntu`)
 
 `ssh ubuntu@<Floating IP>`
 
