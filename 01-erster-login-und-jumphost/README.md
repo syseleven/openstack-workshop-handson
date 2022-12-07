@@ -28,7 +28,6 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit OpenStack zu beginn
 * Rufe die URL https://cloud.syseleven.de im Browser auf
 
 * melde dich mit deinen Zugangsdaten an
-  * Domain: `default`
   * User Name: `<Benutzername>`
   * Password: `<Passwort>`
 * Klick auf "CONNECT"
