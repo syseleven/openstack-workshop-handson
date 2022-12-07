@@ -50,7 +50,10 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit OpenStack zu beginn
 ![](images/04-select-stack-template.png)
 
 * Wähle `URL` als **Template Source** aus
-* Kopiere die URL des Beispiel-Stacks `https://raw.githubusercontent.com/syseleven/openstack-workshop-lab/main/01-erster-login-und-jumphost/kickstart.yaml`
+* Kopiere die URL des Beispiel-Stacks (1 lange Zeile!)
+
+`https://raw.githubusercontent.com/syseleven/openstack-workshop-lab/main/01-erster-login-und-jumphost/kickstart.yaml`
+
 * und füge sie in das Feld **Template URL** ein
 * Wähle `File` als **Environment Source**
 * Klick auf **NEXT**

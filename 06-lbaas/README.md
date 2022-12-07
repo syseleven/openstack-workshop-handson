@@ -50,7 +50,10 @@ Mit dieser Anleitung kannst Du eine einfache Webapplikation über einen Loadbala
 ---
 
 * Wähle `URL` als **Template Source** aus
-* Kopiere die URL des Beispiel-Stacks `https://raw.githubusercontent.com/syseleven/openstack-workshop-lab/main/06-lbaas/lbstack.yaml`
+* Kopiere die URL des Beispiel-Stacks (1 lange Zeile!)
+
+`https://raw.githubusercontent.com/syseleven/openstack-workshop-lab/main/06-lbaas/lbstack.yaml`
+
 * und füge sie in das Feld **Template URL** ein
 * Wähle `File` als **Environment Source**
 * Klick auf **NEXT**
