@@ -41,6 +41,10 @@ Terraform möchte gleich gerne einen `IMAGE_ID` Parameter von uns haben, diesen 
 * Folgendes ausführen: `openstack image list`
 * Suche im Output nach dem neuesten Ubuntu 20.04 Image und kopiere dir die ID, z.B.:
 
+Beispiel:
+
+* Dies ist nur ein Beispiel! Untenstehende Werte, IDs und Namen können nicht 1:1 verwendet werden!
+
 ```plain
 +--------------------------------------+----------------------------------+--------+
 | ID                                   | Name                             | Status |
@@ -57,6 +61,10 @@ Terraform möchte gleich gerne einen `SECGROUP_ID` Parameter von uns haben, dies
 
 * Folgendes ausführen: `openstack security group list`
 * Suche im Output nach der Security Group mit dem Namen `workshop-kickstart-allow ...` und kopiere die ID
+
+Beispiel:
+
+* Dies ist nur ein Beispiel! Untenstehende Werte, IDs und Namen können nicht 1:1 verwendet werden!
 
 ```plain
 +--------------------------------------+-----------------------------------------------------------------+----------------------------------------------------+----------------------------------+------+
@@ -80,6 +88,10 @@ Terraform möchte gleich gerne einen `SECGROUP_ID` Parameter von uns haben, dies
   * `NETWORK_NAME` - Name des bestehenden Netzes: `workshop-kickstart-net`
   * `SECGROUP_ID` - ID der Security Group, siehe vorheriger Schritt
 * Das Ergebnis sieht zum Beispiel so aus:
+
+Beispiel:
+
+* Dies ist nur ein Beispiel! Untenstehende Werte, IDs und Namen können nicht 1:1 verwendet werden!
 
 ```tf
 resource "openstack_compute_instance_v2" "simple_instance" {

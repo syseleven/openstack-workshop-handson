@@ -76,6 +76,8 @@ openstack server create \
 
 Beispiel:
 
+* Dies ist nur ein Beispiel! Untenstehende Werte, IDs und Namen können nicht 1:1 verwendet werden! 
+
 ```
 openstack server create \
   --flavor "m1.tiny" \
