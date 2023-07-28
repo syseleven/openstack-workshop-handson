@@ -1,47 +1,47 @@
-# Webserver mit Loadbalancer
+# Webserver with loadbalancer
 
-## Übersicht
+## Overview
 
-Mit dieser Anleitung kannst Du eine einfache Webapplikation über einen Loadbalancer veröffentlichen.
+With this guide you can deploy a simple web application and pblish it through a loadbalancer.
 
-## Ziel
+## Goal
 
-* erstelle zwei Webserver mit einer einfachen Web-Applikation
-* die Applikation soll hinter einem Loadbalancer unter einer öffentlichen IP erreichbar sein
+* create two webservers with a simple web application
+* the application will be served behind a loadbalancer and you can request it by a public IP address
 
-## Vorbereitung
+## Preparation
 
-* Du brauchst die Login Daten für OpenStack
-  * Benutzername
-  * Passwort
+* You need your credentials for Openstack
+  * Username
+  * Password
   * Project ID
-  * Region Name
-* grundlegende Kenntnisse zum Umgang mit einem Linux Terminal und SSH
+  * Region name
+* Web browser
 
 ---
 
 ### Login
 
-* Rufe die URL https://cloud.syseleven.de im Browser auf
+* Visit URL https://cloud.syseleven.de
 
-* melde dich mit deinen Zugangsdaten an
+* log in with your credentials
   * Domain: `default`
   * User Name: `<Benutzername>`
   * Password: `<Passwort>`
-* Klick auf "CONNECT"
+* Click "CONNECT"
 
 ![](images/001-login-window.png)
 
-### Region auswählen
+### Select region
 
-* Überprüfe zunächst in welcher Region Du angemeldet bist und wechsle ggf. auf die richtige Region
+* First check if you have set the correct region. If not please change region.
 
 ![](images/002-select-region.png)
 
-### Heat Stack starten
+### Start Heat Stack
 
-* Klicke auf "Project" --> "Orchestration" --> "Stacks" um den Beispiel-Stack in Horizon zu erstellen
-* Klick auf "Launch Stack"
+* Click "Project" --> "Orchestration" --> "Stacks" to create the demo stack in Horizon
+* click "Launch Stack"
 
 ![](images/003-orchestration-stacks.png)
 
@@ -49,33 +49,33 @@ Mit dieser Anleitung kannst Du eine einfache Webapplikation über einen Loadbala
 
 ---
 
-* Wähle `URL` als **Template Source** aus
-* Kopiere die URL des Beispiel-Stacks (1 lange Zeile!)
+* Select `URL` as a **Template Source**
+* Copy the URL of the demo stack (1 long line!)
 
 `https://raw.githubusercontent.com/syseleven/openstack-workshop-lab/main/06-lbaas/lbstack.yaml`
 
-* und füge sie in das Feld **Template URL** ein
-* Wähle `File` als **Environment Source**
-* Klick auf **NEXT**
+* and paste it into the field **Template URL**
+* Select `File` as **Environment Source**
+* click **NEXT**
 
 ---
 
-* trage in das Feld **Stack Name** den Namen `webserver` ein
-* bearbeite nun die folgenden Eingabefelder:
-* trage dein OpenStack Passwort in das Feld **Password for user...** ein
-* wähle als **flavor** `m1.tiny`
-* wähle als **image** ein beliebiges `Ubuntu Focal 20.04 ...` Image aus
-* wähle für **key_name** den vorhandenen Workshop SSH Key aus und
-* klicke abschließend auf dne Button **LAUNCH**
+* in the field **Stack Name** enter `webserver` as a name
+* edit the following fields:
+* enter your OpenStack password in the field **Password for user...**
+* select as a **flavor** `m1.tiny`
+* select an arbitrary `Ubuntu Focal 20.04 ...` **image**
+* select the existing SSH key for **key_name**
+* click the button **LAUNCH**
 
 ![](images/005-launch-webserver-stack.png)
 
 ---
 
-### Aufbau des Loadbalancer Stacks
+### Setup of the loadbalancer stack
 
-Der Heat Stack bestehend aus Loadbalancer und Webservern wird nun erstellt
-und der Fortschritt kann mit klick auf den Stack-Namen beobachtet werden
+The Heat Stack consists of a loadbalancer and webservers and is now being created.
+The progress can be followed by clicking the stack name.
 
 ![](images/006-webserver-stack-complete.png)
 
@@ -85,44 +85,44 @@ und der Fortschritt kann mit klick auf den Stack-Namen beobachtet werden
 
 ---
 
-Sobald alle Komponenten grün dargestellt werden, können diese angezeigt werden
+AS soon as all components are displayed green they can be selected and observed.
 
-* so z.B. auch die beiden Webserver-Instances unter **Compute** --> **Instances**
-* diese sind mit `upstream0` und `upstream1` benannt
+* for example the both webserver instances under **Compute** --> **Instances**
+* they are named `upstream0` and `upstream1`
 
 ![](images/008-webserver-instances.png)
 
 ---
 
-Der Loadbalancer wurde ebenfalls erstellt und kann unter **Network** --> **Octavia Load Balancers** angezeigt werden
+The loadbalancer was also created and can be observed under **Network** --> **Octavia Load Balancers**
 
 ![](images/009-webserver-loadbalancer.png)
 
-* Klick auf den Namen des Loadbalancers um dessen öffentliche IP zu sehen
-* darunter ist die Demo-Applikation nun im Browser erreichbar
-* teste dies indem du sie aufrufst: `http://<Loadbalancer-IP>`
+* click the name of the loadbalancer to display its public IP address
+* use the IP to visit the demo application in your web browser: `http://<Loadbalancer-IP>`
 
 
 ![](images/010-loadbalancer-public-ip.png)
 
 ---
 
-#### Ziel
+#### Goal
 
-* lade die aufgerufene Website im Browser neu
-* der Inhalt der Website sollte den Hostnamen des jeweiligen Webservers ausgeben und diesen wechseln
+* refresh the website in your browser several times
+* Result: the content of the page displays the names of both webservers serving the web content
+* this means the loadbalancer fulfills its task
 
-`upstream0` -> `upstream1` und so weiter...
+`upstream0` -> `upstream1` -> `upstream0` and so on...
 
 ---
 
-#### Weitere Aufgaben
+#### Other tasks
 
-Der Loadbalancer selbst enthält mehrere Sub-Komponenten
+The loadbalancer itself contains several sub-components:
 
 * Listener
 * Pools
 * Health Monitors
 * Members
 
-* lasse sie in Horizon anzeigen und prüfe ob diese alle im Status `online` sind
+* display thoses components in Horizon and verify they are in state `online`

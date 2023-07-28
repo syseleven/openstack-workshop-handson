@@ -1,100 +1,99 @@
-# Erstellen und Mounten eines Volumes per Horizon
+# Create and mount a volume with Horizon
 
-## Übersicht
+## Overview
 
-Mit dieser Anleitung kannst Du Volumes per Horizon Web UI erstellen und in einer Instance mounten.
+With this guide you can create a volume in Horizon and mount it to an instance.
 
-## Ziel
+## Goal
 
-* Erstelle eine Volume mittels Horizon Web UI
-* erstelle ein Filesystem auf dem Volume
-* mounte das Volume in einer Instance
+* Create a volume in Horizon
+* create a file system on the volume
+* mount the volume on an instance
 
-## Vorbereitung
+## Preparation
 
-* Du brauchst die Login Daten für OpenStack
-  * Benutzername
-  * Passwort
+* You need your Openstack credentials
+  * Username
+  * Password
   * Project ID
-  * Region Name
-* Bereits installierte Instance aus Aufgabe [02-instance-per-horizon](/02-instance-per-horizon)
+  * Region name
+* Previously installed installed from task [02-instance-per-horizon](/02-instance-per-horizon)
 
 ---
 
 ## Start
 
-* Log dich auf https://cloud.syseleven.de in die Horizon Web UI mit deinen Zugangsdaten ein
+* Log in at https://cloud.syseleven.de Horizon Web UI with you credentials
 
 ![](images/001-login-windows.png)
 
-* überprüfe deine aktuelle Region und wechsle ggf. auf die korrekte Region
+* check if you have selected the correct region. if not please switch region.
 
 ![](images/002-select-region.png)
 
 ---
 
-### Volume erstellen
+### Create volume
 
-* Klicke auf **Project** --> **Volumes** --> **Volumes**
-* klicke auf den Button **CREATE VOLUME**
+* Click **Project** --> **Volumes** --> **Volumes**
+* click the button **CREATE VOLUME**
 
 ![](images/003-button-create-volume.png)
 
-* trage unter **Volume Name** `workshop` als Bezeichnung ein
-* optional kann eine **Description** eingetragen werden
-* wähle als **Volume Source** `NO SOURCE, EMPTY VOLUME` aus
-* setze den **Type** auf `QUOBYTE`
-* trage eine **Size (GiB)** von `1` ein
-* wähle unter **Availability Zone** die dir zugewiesene **Region** aus
-* klicke abschließend auf **CREATE VOLUME**
+* under **Volume Name** enter `workshop`
+* optionally add a **Description**
+* select as **Volume Source** `NO SOURCE, EMPTY VOLUME`
+* set **Type** to `QUOBYTE`
+* enter a **Size (GiB)** of `1`
+* under **Availability Zone** select the assigned **Region**
+* click **CREATE VOLUME**
 
 ![](images/010-create-volume.png)
 
 ---
 
-* das Volume wird nun erstellt und wird in der Liste der Volumes angezeigt
+* the volume will now be created and appears in the list
 
 ![](images/011-volume-created.png)
 
-#### Was fällt auf?
+#### What did you notice?
 
-* das Volume ist "available", da es noch keiner Instance zugeordnet (attached) wurde
+* the volume is in state "available", because it is not yet attached to an instance
 
 ---
 
-### Zuordnen eines Volumes zu einer Instance
+### Attach a volume to an instance
 
-Um nun das erstellte Volume einer Instance zuzuordnen und es dort nutzen zu können:
+To attach the newly created volume to an instance and to use it there, do:
 
-* wechsle auf **Compute** --> **Instances**
-* wähle neben einer der zuvor erstellten Instances (server-horizon oder server-cli) die
-Aktion **ATTACH VOLUME** aus
+* click **Compute** --> **Instances**
+* select the action **ATTACH VOLUME** next to the instance (server-horizon oder server-cli)
 
 ![](images/020-action-attach-volume.png)
 
-* wähle als **Volume ID** das zuvor erstellt Volume anhand des Namens oder ggf. der ID aus
-* und klicke auf **ATTACH VOLUME**
+* as **Volume ID** select the previously created volume identified by its name or ID
+* click **ATTACH VOLUME**
 
 ![](images/030-attach-volume.png)
 
 ---
 
-#### Was fällt auf?
+#### What did you notice?
 
-* das Volume wird nun als "in-use" angezeigt
-* dies bedeutet, es ist einer Instance zugeordnet
+* the volume is displayed as state "in-use"
+* this means it is now attached to an instance
 
 ---
 
-### Mounten eines Volumes in einer Instance
+### Mounting a volume in an instance
 
-* verbinde dich vom Jumphost aus per SSH auf die Instance der das Volume zugeordnet (attached) wurde
+* use the jumphost to log in to the instance the volume is attached to
 
 `ssh ubuntu@<Instance-IP>`
 
-* überprüfe ob das Betriebssystem der Instance das Volume als neues Device erkannt hat:
-
-* Volumes werden alphapetisch mit `/dev/vd[a-z]` benannt und die Aktion im System-Log angezeigt
+* check if the operating system of the instance has found volume as a new device
+* 
+* volumes are named in alpabetical order like `/dev/vd[a-z]` and this action is logged in the system log
 
 ```
 dmesg
@@ -103,9 +102,9 @@ dmesg
 [  511.194305] virtio_blk virtio4: [vdb] 2097152 512-byte logical blocks (1.07 GB/1.00 GiB)
 ```
 
-* neben den Partitionen des Betriebssystems (`vda`) wird auch das neue Volume (`vdb`) angezeigt
+* next to the partitions of the OS (`vda`) also the new volume is displayed (`vdb`)
 
-* es enthält noch kein Filesystem oder Partitionen
+* still it does not contain a filesystem or partitions
 
 ```
 lsblk -o NAME,FSTYPE,LABEL,SIZE,MOUNTPOINT
@@ -119,13 +118,13 @@ vda                                50G
 vdb                                 1G
 ```
 
-* um das Volume zu mounten schreiben wir zunächst ein Filesystem darauf, z.B. ext4:
+* to mount the volume you need to create a file system, for example ext4:
 
 ```
 sudo mkfs.ext4 /dev/vdb
 ```
 
-* daraufhin wird das Filesystem auch angezeigt:
+* then the filesystem is displayed:
 
 ```
 lsblk -o NAME,FSTYPE,LABEL,SIZE,MOUNTPOINT
@@ -139,13 +138,13 @@ vda                                50G
 vdb     ext4                        1G
 ```
 
-* schließlich können wir das Volume an einen beliebigen Ort mounten:
+* now we can mount the volume to directory /mnt
 
 ```
 sudo mount -t auto -v /dev/vdb /mnt
 ```
 
-* in der Verzeichnisstruktur des Betriebssystems taucht das neue Volume nun auch auf:
+* the volume now shows up in the file structure of the operating system:
 
 ```
 df -h
@@ -155,20 +154,20 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/vdb        974M   24K  907M   1% /mnt
 ```
 
-* wir können nun Daten darauf schreiben:
+* we can now write data to it:
 
 `sudo touch /mnt/hello.txt`
 
 ---
 
-* optional können wir das Volume auch wieder unmounten:
+* optionally we can unmount it again:
 
 ```
 sudo umount /mnt
 ```
 
-### Fazit
+### Result
 
-* das Volume kann nun persistent Daten speichern
-* Volumes können von einer Instance an eine andere Instance gebunden werden
-* auch multi-attach Volumes mit speziellem Filesystem sind möglich
+* the volume can now store persistent data
+* volumes can be attached to another instance
+* multi-attach volumes are also possible with a special file system

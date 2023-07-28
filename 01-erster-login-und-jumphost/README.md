@@ -1,87 +1,87 @@
-# Erster Login in OpenStack und Jumphost
+# First login in Openstack and jumphost
 
-## Übersicht
+## Overview
 
-Mit dieser Anleitung kannst Du eine einzelne Instance mit einem vorinstallierten 
-OpenStack Client über das Horizon Dashboard (GUI) erstellen.
+With this guide you can create a single instance with a preinstalled Openstack client
+via the Horizon Dashboard (GUI).
 
-Dieser "Jumphost" enthält alle erforderlichen Tools, um mit OpenStack zu beginnen.
+This jumphost contains all required tool to start with Openstack.
 
-## Ziel
+## Goal
 
-* erstelle eine Jumphost Instance via Horizon (GUI)
-* automatisierte Installation des OpenStack Clients in der neuen Instance
+* create a jumphost instance via Horizon (GUI)
+* automated installation of Openstack client in the new instance
 
-## Vorbereitung
+## Preparation
 
-* Du brauchst die Login Daten für OpenStack
-  * Benutzername
-  * Passwort
+* You need your login credentials for Openstack
+  * Username
+  * Password
   * Project ID
-  * Region Name
-* grundlegende Kenntnisse zum Umgang mit einem Linux Terminal und SSH
+  * Region name
+* basic knowledge of using a Linux terminal and SSH
 
 ---
 
 ### Login
 
-* Rufe die URL https://cloud.syseleven.de im Browser auf
-
-* melde dich mit deinen Zugangsdaten an
-  * User Name: `<Benutzername>`
-  * Password: `<Passwort>`
-* Klick auf "Sign In"
+* Visit URL https://cloud.syseleven.de
 
 ![](images/01-login-window.png)
 
-### Region auswählen
+* log in with your credentials
+  * User Name: `<username>`
+  * Password: `<password>`
+* Click "Sign In"
 
-* Überprüfe zunächst in welcher Region Du angemeldet bist und wechsle ggf. auf die richtige Region
+### Choose region
+
+* First check if you are in the correct region. If not please switch region.
 
 ![](images/02-select-region.png)
 
-### Heat Stack starten
+### Start Heat Stack
 
-* Klicke auf "Project" --> "Orchestration" --> "Stacks" um den Beispiel-Stack in Horizon zu erstellen
-* Klick auf "Launch Stack"
+* Click "Project" --> "Orchestration" --> "Stacks" to create the demo Stack in Horizon
+* Click "Launch Stack"
 
 ![](images/03-orchestration-stacks.png)
 
 ![](images/04-select-stack-template.png)
 
-* Wähle `URL` als **Template Source** aus
-* Kopiere die URL des Beispiel-Stacks (1 lange Zeile!)
+* Select `URL` as **Template Source**
+* Copy the URL of the demo Stack (1 long line!)
 
 `https://raw.githubusercontent.com/syseleven/openstack-workshop-lab/main/01-erster-login-und-jumphost/kickstart.yaml`
 
-* und füge sie in das Feld **Template URL** ein
-* Wähle `File` als **Environment Source**
-* Klick auf **NEXT**
+* and paste it into the textfield **Template URL**
+* choose `File` as **Environment Source**
+* Click **NEXT**
 ---
 
 ![](images/05-launch-stack.png)
 
-* trage in das Feld **Stack Name** den Namen `workshop` ein
-* trage dein OpenStack Password in das Feld **Password for User ...** ein
-* **flavor:** wähle den Flavor `m1.tiny` aus
-* **image:** wähle ein beliebiges `Ubuntu Focal 20.04 (...)` Image aus
-* **key_name:** wähle den bereits vorhandenen SSH-Key `workshop` aus
-* Klick auf "LAUNCH"
+* in the field **Stack Name** enter the name `workshop`
+* enter your Openstack password into the field **Password for User ...**
+* **flavor:** choose flavor `m1.tiny`
+* **image:** select an arbitrary `Ubuntu Focal 20.04 (...)` image
+* **key_name:** choose the existing SSH-key `workshop`
+* Click "LAUNCH"
 
 ---
 
-### Überprüfen und Verbinden
+### Verify and connect
 
-* Daraufhin ist der Stack im Status **Create In Progress** oder **Create Complete**
-* Klick auf **Compute** --> **Instances**
-* beachte die **Floating IP** in der Spalte **IP Address** deiner neuen Instance
-* öffne ein Terminal deiner Wahl und log dich via SSH mit dem Benutzernamen `syseleven` in deine Jumphost-Instance ein:
+* Then the stack is in status **Create In Progress** or **Create Complete**
+* Click **Compute** --> **Instances**
+* notice the **Floating IP** in the column **IP Address** of your new instance
+* open a terminal on your local machine and log in via SSH with username `syseleven` into your jumphost vm:
 
-`ssh syseleven@<Workshop-Kickstart-FloatingIP> -A -i /pfad/zum/private-key`
+`ssh syseleven@<Workshop-Kickstart-FloatingIP> -A -i /path/to/private-key`
 
 ---
 
-Ggf. musst Du die folgende Meldung des SSH-Servers mit `yes` bestätigen:
+Maybe you need to confirm the following message with `yes`:
 
 ```
 The authenticity of host 'x.x.x.x (x.x.x.x)' can't be established.
@@ -92,16 +92,16 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 
 ---
 
-**Beachte:**
+**Notice:**
 
-die Bereitstellung aller nötigen Tools im Jumphost kann wenige Minuten dauern
+provisioning of all required tools in the jumphost may take a few minutes
 
 ---
 
-### Einrichten und Testen des OpenStack Clients
+### Setting up and testing the Openstack client
 
-* wenn Du erfolgreich mit dem SysEleven-Jumphost verbunden bist,
-* kopiere den gesamten folgenden Inhalt in dein SSH Terminal und führe ihn aus
+* if you are successfully connected with the SysEleven-jumphost,
+* copy the following content completely into your SSH terminal and execute it:
 
 ```
 cat > /home/syseleven/myopenrc << EOL
@@ -113,36 +113,36 @@ if [ -z "$OS_REGION_NAME" ]; then unset OS_REGION_NAME; fi
 export OS_USER_DOMAIN_NAME="Default"
 unset OS_TENANT_ID
 unset OS_TENANT_NAME
-read -p "Please enter your OpenStack Project ID: " OS_PROJECT_ID
+read -p "Please enter your Openstack Project ID: " OS_PROJECT_ID
 export OS_PROJECT_ID
-read -p "Please enter your OpenStack Region Name ('cbk', 'dbl', 'fes'): " OS_REGION_NAME
+read -p "Please enter your Openstack Region Name ('cbk', 'dbl', 'fes'): " OS_REGION_NAME
 export OS_REGION_NAME
-read -p "Please enter your OpenStack Username: " OS_USERNAME
+read -p "Please enter your Openstack Username: " OS_USERNAME
 export OS_USERNAME
-read -sp "Please enter your OpenStack Password: " OS_PASSWORD
+read -sp "Please enter your Openstack Password: " OS_PASSWORD
 export OS_PASSWORD
 EOL
 ```
 
-* aktiviere deine Umgebung für den OpenStack Client: 
+* activate your environment for the Openstack client: 
 
 `source /home/syseleven/myopenrc`
 
-* Gib für die folgenden Abfragen deine individuellen Zugangsdaten ein und bestätige jeweils mit **Enter**
+* Enter your individual credentials and confirm with **Enter**
   * `<Project ID>`
   * `<Region Name>`
   * `<Username>`
   * `<Password>`
 
-Hinweis: diese Angaben (außer Passwort) findest Du auch in Horizon unter 
+Notice: find these settings (except the password) in Horizon under: 
 **Project** --> **API Access** --> **VIEW CREDENTIALS**
 
 ---
 
-### Verwenden des OpenStack Clients
+### Using the Openstack clients
 
-* Teste nun den OpenStack Client mit folgendem Befehl:
+* Verify if the Openstack client works by this command:
 
 `openstack server list`
 
-Ergebnis: es sollte der soeben eingerichtete Jumphost angezeigt werden
+Result: the newly created jumphost should appear

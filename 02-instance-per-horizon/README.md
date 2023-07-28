@@ -1,119 +1,118 @@
-# Erstellen einer Instance über das Horizon Web UI
+# Creating an instance via Horizon dashboard
 
-## Übersicht
+## Overview
 
-Mit dieser Anleitung kannst Du eine einzelne Instance per Horizon Web UI erstellen.
+With this guide you can create a single instance via Horizon Web UI.
 
-## Ziel
+## Goal
 
-* Erstelle eine Instance mittels Horizon Web UI
+* Create a single instance via Horizon Web UI
 
-## Vorbereitung
+## Preparation
 
-* Du brauchst die Login Daten für OpenStack
-  * Benutzername
-  * Passwort
+* You need your login credentials for Openstack
+  * Username
+  * Password
   * Project ID
-  * Region Name
-* Bereits installierte Infrastruktur aus Aufgabe [01-erster-login-und-jumphost](/01-erster-login-und-jumphost)
+  * Region name
+* previously installed infrastructure from the lab [01-erster-login-und-jumphost](/01-erster-login-und-jumphost)
 
 ---
 
 ## Start
 
-* Log dich auf https://cloud.syseleven.de in die Horizon Web UI mit deinen Zugangsdaten ein
+* Log into https://cloud.syseleven.de Horizon Web UI with your credentials.
 
 ![](images/001-login-windows.png)
 
-* überprüfe deine aktuelle Region und wechsle ggf. auf die korrekte Region
+* Check if you are in the correct region. If not please switch region.
 
 ![](images/002-select-region.png)
 
 ---
 
-## Erstellen der Instance
+## Create an instance
 
-* Klicke auf **Project** --> **Compute** --> **Instances**
-* Klicke auf den Button **LAUNCH INSTANCE**
+* Click **Project** --> **Compute** --> **Instances**
+* Click the button **LAUNCH INSTANCE**
 
 ![](images/005-launch-instance-button.png)
 
 ---
 
-* Trage `server-horizon` als **Instance Name** und
-* optional eine Beschreibung unter **Description** ein
-* wähle den Namen der dir zugewiesenen **Region** als **Availability Zone** aus und
-* belasse den **Count** auf `1`
-* klicke dann auf **NEXT**
+* Enter `server-horizon` as **Instance Name** and
+* optionally enter a description under **Description**
+* choose the name of your assigned **Region** as **Availability Zone** and
+* leave the **Count** at `1`
+* click **NEXT**
 
 ![](images/010-launch-instance-details.png)
 
 ---
 
-* belasse die folgenden Einstellungen unverändert:
+* leave the following settings unchanged:
 
 * **Select Boot Source**: `Image`
 * **Create New Volume**: `NO`
 
-* Wähle nun aus der Liste der verfügbaren Betriebssystem Images ein beliebiges `Ubuntu Focal (...)` aus und aktiviere es
-per Klick auf den Pfeil (nach oben)
-* Klicke nun auf **NEXT**
+* Now choose an arbitrary image `Ubuntu Focal (...)` and activate it via the arrow symbol (upwards)
+* click **NEXT**
 
 ![](images/020-launch-instance-source.png)
 
 ---
 
-* wähle aus der Liste der Flavors `m1.tiny` aus und aktiviere es per Klick auf den Pfeil (nach oben)
-* Klicke nun auf **NEXT**
+* select `m1.tiny` from the flavor list and activate it by the arrow (upwards)
+* click **NEXT**
 
 ![](images/030-launch-instance-flavor.png)
 
 ---
 
-* wähle aus der Liste das in Aufgabe [01-erster-login-und-jumphost](/01-erster-login-und-jumphost) 
-erstellte Netzwerk `workshop-kickstart-net` aus und 
-* aktiviere es per Klick auf den Pfeil (nach oben)
-* Klicke nun auf **NEXT**
+* select from the list the previously created network [01-erster-login-und-jumphost](/01-erster-login-und-jumphost) 
+ `workshop-kickstart-net` and 
+* activate it by clicking the arrow (upwards)
+* click **NEXT**
 
 ![](images/040-launch-instance-networks.png)
 
 ---
 
-* der Bereich **Network Ports** muss in diesem Beispiel nicht konfiguriert werden,
-* klicke daher einfach auf **NEXT**
+* the section **Network Ports** does not need to be configured in this workshop
+* click **NEXT**
 
 ---
 
-* entferne die **Security Group** `default` per Klick auf den Pfeil (nach unten)
+* remove the **Security Group** `default` by clicking the arrow (down)
 
 ![](images/050-launch-instance-security-groups.png)
 
-* aktiviere die vorhandene **Security Group** `workshop-kickstart-allow ...` per Klick auf den Pfeil (nach oben)
-* Klicke nun auf **NEXT**
+* activate the existing **Security Group** `workshop-kickstart-allow ...` by clicking the arrow (up)
+* click **NEXT**
 
 ![](images/051-launch-instance-security-groups.png)
 
 ---
 
-* wähle das vorhandene Key Pair `workshop` aus und
-* aktiviere es per Klick auf den Pfeil (nach oben)
-* die übrigen Einstellungsmenüs sind für dieses Beispiel nicht erforderlich,
-* klicke darum gleich abschließend auf **LAUNCH INSTANCE**
+* select the existing key pair `workshop` and
+* activate it by clicking the arrow (up)
+* all the other settings are not required for this lab
+* click **LAUNCH INSTANCE**
 
 ![](images/060-launch-instance-key-pair.png)
 
 ---
 
-### Was fällt auf?
+### What did you notice?
 
-* die Instance hat keine public IP
+* the instance has no public IP address
 
-### Weitere Aufgaben
+### Other tasks
 
-* lasse die Instance in Horizon anzeigen und notiere ihre IP-Adresse
-* überprüfe die Instance in der Network Topology
-* log dich vom Jumphost aus auf der Instance ein
+* display the instance in Hoirzon and note its IP address
+* check the instance in the network topology
+* use the jumphost to log in to the instance
 
 `ssh ubuntu@<Instance-IP>`
 
-* warum ist der Benutzername hier `ubuntu`?
+* why is the username `ubuntu`?
