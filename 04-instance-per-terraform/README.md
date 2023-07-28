@@ -1,49 +1,49 @@
-# Erstellen einer Instance per Terraform
+# Creating an instance with Terraform
 
-## Übersicht
+## Overview
 
-Mit dieser Anleitung kannst Du eine einzelne Instance per Terraform erstellen.
+With this guide you can create a single instance with Terraform.
 
-## Ziel
+## Goal
 
-* Erstelle eine Instance via Terraform-Automation
+* Create a single instance with Terraform automation
 
-## Vorbereitung
+## Preparation
 
-* Du brauchst die Login Daten für OpenStack
-  * Benutzername
-  * Passwort
+* You need your Openstack credentials
+  * Username
+  * Password
   * Project ID
-  * Region Name
-* Grundlegende Kenntnisse zum Umgang mit einem Linux Terminal und SSH
-* Bereits installierte Jumphost VM aus Aufgabe [01-erster-login-und-jumphost](/01-erster-login-und-jumphost)
+  * Region name
+* basic knowledge of using a Linux terminal and SSH
+* previously installed jumphost from lab [01-erster-login-und-jumphost](/01-erster-login-und-jumphost)
 
 ---
 
-### Sourcecode klonen
+### Clone source code
 
-* Verbinde dich per SSH mit deiner Jumphost VM aus der vorherigen Aufgabe (wenn noch nicht geschehen)
-* Für die folgenenden Schritte benötigst du die Dateien aus diesem Repository, daher musst du es auf deinem Jumphost klonen:
-  * Führe das Kommando aus: `git clone https://github.com/syseleven/openstack-workshop-lab.git`
-  * Wechsele in den richtigen Ordner für diese Aufgabe: `cd openstack-workshop-lab/04-instance-per-terraform`
+* Connect with your jumphost from the previous lab
+* for the following steps you need the files from this repository, so you need to clone it to your jumphost:
+  * execute this command: `git clone https://github.com/syseleven/openstack-workshop-lab.git`
+  * Change the directory for the following tasks: `cd openstack-workshop-lab/04-instance-per-terraform`
 
-### Umgebung für den OpenStack Client aktivieren
+### Activate environment for the Openstack client
 
-* **Hinweis:** Solltest du die gleiche Session aus der vorherigen Aufgabe verwenden, kannst du diesen Schritt überspringen
-* Wenn du eine neue Session auf dem Jumphost hast, musst du für die Verbindung zum OpenStack wieder das RC-File sourcen:
+* **Notice:** If you use the same SSH session from the previous lab you may skip this step.
+* If you just created a new SSH session to the jumphost, you need to source the RC-file again to be able to use the Openstack client:
   * `source /home/syseleven/myopenrc`
-  * Interaktive Abfragen beantworten
+  * Answer the interactive prompt
 
-### IMAGE_ID Parameter für die Instanz erhalten
+### Obtain IMAGE_ID parameter for the instance
 
-Terraform möchte gleich gerne einen `IMAGE_ID` Parameter von uns haben, diesen besorgen wir uns wie folgt:
+Terraform asks for a parameter `IMAGE_ID` which we obtain by:
 
-* Folgendes ausführen: `openstack image list`
-* Suche im Output nach dem neuesten Ubuntu 20.04 Image und kopiere dir die ID, z.B.:
+* Execute the following command: `openstack image list`
+* Look in the output for the current `Ubuntu 20.04 ...` Image and copy its ID, for example:
 
-Beispiel:
+Example:
 
-* Dies ist nur ein Beispiel! Untenstehende Werte, IDs und Namen können nicht 1:1 verwendet werden!
+* This is just an example! Below values will be different in you setup.
 
 ```plain
 +--------------------------------------+----------------------------------+--------+
@@ -55,16 +55,16 @@ Beispiel:
 +--------------------------------------+----------------------------------+--------+
 ```
 
-### SECGROUP_ID Parameter für die Instanz erhalten
+### Obtain SECGROUP_ID parameter for the instance
 
-Terraform möchte gleich gerne einen `SECGROUP_ID` Parameter von uns haben, diesen besorgen wir uns wie folgt:
+Terraform asks for a paremeter `SECGROUP_ID` which we obtain by:
 
-* Folgendes ausführen: `openstack security group list`
-* Suche im Output nach der Security Group mit dem Namen `workshop-kickstart-allow ...` und kopiere die ID
+* execute this command: `openstack security group list`
+* in the output look for a security group with the name `workshop-kickstart-allow ...` and copy its ID
 
-Beispiel:
+Example:
 
-* Dies ist nur ein Beispiel! Untenstehende Werte, IDs und Namen können nicht 1:1 verwendet werden!
+* This is just an example. Your settings will look different.
 
 ```plain
 +--------------------------------------+-----------------------------------------------------------------+----------------------------------------------------+----------------------------------+------+
@@ -76,22 +76,21 @@ Beispiel:
 +--------------------------------------+-----------------------------------------------------------------+----------------------------------------------------+----------------------------------+------+
 ```
 
+### Set parameters for the instance
 
-### Parameter für die Instanz anpassen
+* open the file `instance.tf` with an editor: `vi instance.tf`
+* Adjust the settings (marked with CAPS):
+  * `INSTANCE_NAME` - plain text, instance name
+  * `IMAGE_ID` - ID, see previous step
+  * `FLAVOR_NAME` - valid Openstack flavor, set: `m1.tiny`
+  * `KEYPAIR_NAME` - valid Openstack keypair name, here: `workshop`
+  * `NETWORK_NAME` - name of existing network: `workshop-kickstart-net`
+  * `SECGROUP_ID` - ID of the security group, see previous step
+* Result:
 
-* Öffne die Datei `instance.tf` im Editor: `vi instance.tf`
-* Passe die Werte in CAPS an:
-  * `INSTANCE_NAME` - Freitext, Name der Instance
-  * `IMAGE_ID` - ID, siehe vorletzter Schritt
-  * `FLAVOR_NAME` - Gültiger OpenStack Flavor, bevorzugt: `m1.tiny`
-  * `KEYPAIR_NAME` - Gültiger OpenStack Keypair Name, in diesem Fall: `workshop`
-  * `NETWORK_NAME` - Name des bestehenden Netzes: `workshop-kickstart-net`
-  * `SECGROUP_ID` - ID der Security Group, siehe vorheriger Schritt
-* Das Ergebnis sieht zum Beispiel so aus:
+Example:
 
-Beispiel:
-
-* Dies ist nur ein Beispiel! Untenstehende Werte, IDs und Namen können nicht 1:1 verwendet werden!
+* This is just an example. Your settings will look different.
 
 ```tf
 resource "openstack_compute_instance_v2" "simple_instance" {
@@ -116,20 +115,21 @@ resource "openstack_compute_floatingip_associate_v2" "fipas_simple_instance" {
 }
 ```
 
-### Instanz per Terraform ausrollen
+### Create instance with Terraform
 
-* Terraform Projekt lokal initialisieren (einmalig): `terraform init`
-* Zuerst checken, was Terraform tun würde: `terraform plan`
-* Terraform die Instance ausrollen lassen: `terraform apply`
-* Bei interaktiver Frage mit `yes` antworten
+* initialize the Terraform project locally initialisieren: `terraform init`
+* check what Terraform would do: `terraform plan`
+* create the instance with Terraform: `terraform apply`
+* confirm final prompt with `yes`
 
-### Überprüfen
+### Verify
 
-* im Horizon Dashboard die Instanz suchen und mit SSH und Private Key mit der **internen IP Adresse**  verbinden (Username: `ubuntu`)
+* display the instance in Horizon and connect via SSH and your private key
+* **use the internal IP address** and username: `ubuntu`
 
 `ssh ubuntu@<Floating IP>`
 
-### Aufräumen
+### Cleanup
 
-* Terraform die erstellten Resourcen abbauen lassen: `terraform destroy`
-  * Auch hier bei interaktiver Frage mit `yes` antworten
+* have Terraform remove the resources created before: `terraform destroy`
+  * confirm final prompt with `yes`

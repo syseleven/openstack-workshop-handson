@@ -1,68 +1,66 @@
-# Erstellen einer Instance per OpenStack Client
+# Creating an instance via Openstack client
 
-## Übersicht
+## Overview
 
-Mit dieser Anleitung kannst Du eine einzelne Instance per OpenStack Client erstellen.
+With this guide you can create a single instance via the Openstack client.
 
-## Ziel
+## Goal
 
-* Erstelle eine Instance mittels OpenStack Befehlen
+* Create a single instance via Openstack client
 
-## Vorbereitung
+## Preparation
 
-* Du brauchst die Login Daten für OpenStack
-  * Benutzername
-  * Passwort
+* You need your Openstack credentials
+  * Username
+  * Password
   * Project ID
-  * Region Name
-* Grundlegende Kenntnisse zum Umgang mit einem Linux Terminal und SSH
-* Bereits installierte Jumphost VM aus Aufgabe [01-erster-login-und-jumphost](/01-erster-login-und-jumphost)
+  * Region name
+* basic knowledge of using a Linux terminal and SSH
+* previously installed jumphost from lab [01-erster-login-und-jumphost](/01-erster-login-und-jumphost)
 
 ---
 
 ### Start
 
-* Log dich auf dem Jumphost aus der Aufgabe [01-erster-login-und-jumphost](/01-erster-login-und-jumphost) ein
+* Log into the jumphost from lab [01-erster-login-und-jumphost](/01-erster-login-und-jumphost) ein
 
-`ssh syseleven@<Jumphost-IP> -A -i /pfad/zum/private-key`
+`ssh syseleven@<Jumphost-IP> -A -i /path/to/private-key`
 
 ---
 
-### Informationen zur vorhandenen Infrastruktur sammeln
+### Collect information about existing infrastructure
 
-Um die zu erstellende Instance in die vorhandene Netzwerktopologie zu integrieren,
-brauchen wir zunächst einen Überblick über die bisherigen Komponenten.
+To integrate a new instance into the existing network topology we first need an overview
+over the current components.
 
-Mit den folgenden Befehlen erhalten wir Informationen darüber.
+Obtain information with the following commands.
 
-
-
-* wir lassen uns eine Liste der verfügbaren **Flavors** ausgeben
+* print a list of available **Flavors**
 
 `openstack flavor list`
 
-* wir lassen uns die vorhandenen Betriebssystem-**Images** anzeigen
+* display existing operating system **Images**
 
 `openstack image list`
 
-* wir suchen das **Netzwerk** in dem die neue Instance liegen soll
+* look for the **Network** the new instance should be placed in
 
 `openstack network list`
 
-* wir lassen uns die **Security Groups** ausgeben
+* print the **Security Groups**
 
 `openstack security group list`
 
-* wir suchen die vorhandenen SSH **Key Pairs**
+* look for the existing SSH **Key Pairs**
 
 `openstack keypair list`
 
 ---
 
-### Erstellen der neuen Instance
+### Creating a new instance
 
-Nun erstellen wir direkt mit Befehlen des OpenStack Clients eine neue Instance. 
-Trage in den folgenden Zeilen die zuvor gesammelten Informationen ein.
+Now we create a new instance directly with Openstack client commands. 
+Enter the previously collected information into the following lines.
 
 ```
 openstack server create \
@@ -74,9 +72,9 @@ openstack server create \
   server-cli
 ```
 
-Beispiel:
+Example:
 
-* Dies ist nur ein Beispiel! Untenstehende Werte, IDs und Namen können nicht 1:1 verwendet werden! 
+* This is just an example! Below entries, IDs and names will be different on your machine!  
 
 ```
 openstack server create \
@@ -90,32 +88,32 @@ openstack server create \
 
 ---
 
-### Überprüfen des Setups
+### Verify the setup
 
-Nun überprüfen wir den Zustand der neuen Instance
+Now we verify the current state of the instance
 
-* Anzeigen aller Instances
+* Display all instances
 
 `openstack server list`
 
-* Anzeigen der Instance Details
+* Display instance details
 
 `openstack server show server-cli`
 
-#### Was fällt auf?
+#### What did you notice?
 
-* die Instance hat keine Public IP
+* the instance has no public IP address
 
 ### Login
 
-* Login vom Jumphost aus:
+* Use the jumphost to log in to the instance:
 
 `ssh ubuntu@<internal-IP>`
 
-* wir müssen den Username "ubuntu" verwenden, weil dies so im Cloud-Image von Ubuntu festgelegt ist
+* we need to use the username "ubuntu", because the cloud-image of Ubuntu requires it
 
-#### Weitere Aufgaben:
+#### Other tasks:
 
-* lasse dir die Instance in Horizon (GUI) anzeigen
-* überprüfe, ob die Instance in der grafischen Netzwerk-Topologie auftaucht
-* lasse die für die Instance gültige(n) Security Groups anzeigen (Horizon)
+* display the instance in Horizon (GUI)
+* check if the instance appears in the graphical network topology
+* display the security groups assigned to the instance in Horizon
