@@ -30,7 +30,7 @@ Dieser "Jumphost" enthält alle erforderlichen Tools, um mit OpenStack zu beginn
 * melde dich mit deinen Zugangsdaten an
   * User Name: `<Benutzername>`
   * Password: `<Passwort>`
-* Klick auf "CONNECT"
+* Klick auf "Sign In"
 
 ![](images/01-login-window.png)
 
