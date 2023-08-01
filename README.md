@@ -1,23 +1,25 @@
 # OpenStack Workshop
 
-## Inhaltsbeschreibung
+## Content description
 
-Dieser Workshop soll dir einen Überblick über die Cloudplattform OpenStack geben 
-und deren Komponenten vorstellen.
+This workshop gives an overview over the cloud platform Openstack and introduces
+its components.
 
-In Praxisbeispielen werden die wichtigsten Aktionen, Konfigurationen und Einsatzzwecke
-im Umgang mit OpenStack anschaulich vermittelt.
+The most important actions, configurations and use cases are demonstrated through
+practical lab exercises.
 
-## Voraussetzungen
+## Prerequisites
 
-Um die Praxisbeispiele durchführen zu können benötigst Du einen lokalen Rechner
-mit Zugang zu einem SSH Jumphost, der in einem der Praxisbeispiele erstellt wird.
-Die SSH Verbindung wird mit SSH Key Authentifizierung durchgeführt.
+To be able to perform the lab exercises you need a local machine (laptop, etc.)
+with an opportunity to connect to a jumphost with SSH which will be provided during
+this workshop.
+The SSH connection is secured with public key authentication so you can use an existing
+SSH keypair or optionally create one during the workshop.
 
 ---
 
 ###
 
-Weitere Ressourcen und Informationen
+Further resources and information
 
 * [SysEleven OpenStack Cloud Dokumentation](https://docs.syseleven.de/syseleven-stack/en)
