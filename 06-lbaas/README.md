@@ -2,7 +2,7 @@
 
 ## Overview
 
-With this guide you can deploy a simple web application and pblish it through a loadbalancer.
+With this guide you can deploy a simple web application and publish it through a loadbalancer.
 
 ## Goal
 
